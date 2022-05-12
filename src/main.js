@@ -8,8 +8,8 @@ Creative tilt - spooky theme where you can shoot ghost!
 
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
-    height: 480,
+    width: 480,
+    height: 550,
     physics: {
         default: 'arcade',
         arcade: {
@@ -17,7 +17,7 @@ let config = {
             //debug: true
         }
     },
-    scene: [ Menu, Play ]
+    scene: [ Menu ]
 }
 
 let game = new Phaser.Game(config);

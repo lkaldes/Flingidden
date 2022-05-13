@@ -7,7 +7,7 @@ class Menu extends Phaser.Scene {
     }
 
     create(){
-        this.add.tileSprite(0, 0, 640, 480, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     }
 

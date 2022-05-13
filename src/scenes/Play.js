@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
 
     create(){
         this.player = this.physics.add.sprite(300, 400, 'circle');
+        this.player.body.setCollideWorldBounds(true);
         
     }
 

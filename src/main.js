@@ -13,8 +13,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 700},
-            //debug: true
+            debug: false
         }
     },
     scene: [ Menu, Play ]
@@ -23,4 +22,4 @@ let config = {
 let game = new Phaser.Game(config);
 
 // jump, restart, fire keys
-let keyW, keyR, keyF, keyM;
+let click, keyW;

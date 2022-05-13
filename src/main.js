@@ -17,15 +17,10 @@ let config = {
             //debug: true
         }
     },
-    scene: [ Menu ]
+    scene: [ Menu, Play ]
 }
 
 let game = new Phaser.Game(config);
-game.highscore = 0;
-
-// set UI sizes
-let borderUISize = game.config.height / 15;
-let borderPadding = borderUISize / 3;
 
 // jump, restart, fire keys
 let keyW, keyR, keyF, keyM;

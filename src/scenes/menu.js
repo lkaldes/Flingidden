@@ -3,19 +3,18 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
     preload(){
-        this.load.image('title', './assets/TitleScreen.png');
+        this.load.image('title', './assets/background.png');
     }
 
     create(){
-        this.hiscoreword = this.add.text(300, borderUISize + borderPadding - 16, 'High Score: ', { font: '28px Impact', fill: '#f73636'}).setOrigin(0.5);
-        
+        this.add.tileSprite(0, 0, 640, 480, 'title').setOrigin(0, 0);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     }
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.sound.play('sfx_select');
             this.scene.start('playScene');    
-          }
+        }
     }
 
 }

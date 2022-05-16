@@ -30,7 +30,7 @@ class Level1 extends Phaser.Scene {
         this.player.body.allowRotation = true;
         this.player.body.degubShowVelocity = true;
         this.player.setBounce(0.5);
-        this.player.setDragX(30);
+        this.player.setDragX(50);
         this.slopey = 0.0;
         this.slopex = 0.0;
         

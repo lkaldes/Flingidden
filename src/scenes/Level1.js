@@ -15,9 +15,9 @@ class Level1 extends Phaser.Scene {
 
         //movement
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.physics.add.sprite(360, 200, 'obstacle').setScale(3).setSize(136, 40).setOffset(-18, 81);
+        this.obstacle1 = this.physics.add.sprite(360, 200, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
         this.obstacle1.angle = 90;
-        this.obstacle2 = this.physics.add.sprite(360, 660, 'obstacle').setScale(3).setSize(115, 40).setOffset(-8, 81);
+        this.obstacle2 = this.physics.add.sprite(360, 660, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
         this.obstacle2.angle = 90;
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;

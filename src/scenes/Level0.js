@@ -8,7 +8,7 @@ class Level0 extends Phaser.Scene {
         this.load.image('title', './assets/background.png');
         this.load.image('obstacle', './assets/obstacle.png');
         this.load.image('goal', './assets/tempgoal.png');
-        
+        this.load.audio('bounce', './assets/BallBounceSound.wav');
     }
 
     create(){
@@ -51,6 +51,9 @@ class Level0 extends Phaser.Scene {
             this.player.setGravityY(-800);
         } else if (this.player.body.position.y > 460){
             this.player.setGravityY(800);
+        }
+        if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (this.player.body.velocity.x != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
+            this.sound.play('bounce');
         }
         if (this.player.body.blocked.down || this.player.body.blocked.up) {
             this.player.setDragX(500);

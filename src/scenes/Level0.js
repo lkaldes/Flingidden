@@ -21,6 +21,7 @@ class Level0 extends Phaser.Scene {
         this.obstacle2.angle = 90;
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
+        this.arrow = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30);
         this.player = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30);
 
         this.goal1 = this.physics.add.sprite(85, 85, 'goal').setScale(0.75).setSize(30, 30);
@@ -42,9 +43,17 @@ class Level0 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.goal1, this.nextlevel, null, this);
         this.physics.add.overlap(this.player, this.goal2, this.nextlevel, null, this);
         this.input.on('pointerup', this.fling.bind(this));
+        this.input.on('pointermove', this.point, this);
     }
 
     update(){
+        if (this.player.body.velocity.x == 0 && Math.abs(this.player.body.velocity.y) < 5) {
+            this.arrow.alpha = 100;
+        } else {
+            this.arrow.alpha = 0;
+        }
+        this.arrow.body.position.x = this.player.body.position.x;
+        this.arrow.body.position.y = this.player.body.position.y;
         if (this.player.body.position.y > 400 && 460 > this.player.body.position.y) {
             this.player.setGravityY(0);
         } else if (this.player.body.position.y < 400) {
@@ -69,6 +78,11 @@ class Level0 extends Phaser.Scene {
             this.player.setVelocityY(this.slopey);
             this.player.setVelocityX(this.slopex);
         }
+    }
+
+    point(pointer) {
+        var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.arrow.body.position.x, this.arrow.body.position.y, pointer.x, pointer.y);
+        this.arrow.setAngle(angle);
     }
 
     nextlevel(){

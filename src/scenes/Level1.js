@@ -22,10 +22,11 @@ class Level1 extends Phaser.Scene {
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
         this.arrow = this.physics.add.sprite(720/2, 430, 'arrow').setSize(30, 30).setOrigin(-.31,.45);
-        this.player = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30);
+        this.player = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30).setOrigin(.5);
 
         this.goal1 = this.physics.add.sprite(360, 85, 'goal').setScale(0.75).setSize(30, 30);
         this.goal2 = this.physics.add.sprite(360, 785, 'goal').setScale(0.75).setSize(30, 30);
+        this.graphics = this.add.graphics();
        
         this.player.setGravityY(0);
         this.player.body.allowRotation = true;
@@ -35,6 +36,8 @@ class Level1 extends Phaser.Scene {
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.body.maxVelocity.setTo(1500, 1500);
+        this.player.depth = 100;
+        this.arrow.depth = 90;
         
         //collision
         this.player.body.setCollideWorldBounds(true);
@@ -79,6 +82,7 @@ class Level1 extends Phaser.Scene {
 
     fling(pointer, player) {
         if (this.player.body.velocity.x == 0 && Math.abs(this.player.body.velocity.y) < 5) {
+            this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
             this.player.setVelocityY(this.slopey);
@@ -88,9 +92,17 @@ class Level1 extends Phaser.Scene {
     }
 
     point(pointer, player) {
-        var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
-        this.arrow.setAngle(angle);
-        //this.arrow.scaleX = Math.sqrt(Math.pow(pointer.x - this.player.body.position.x, 2) + Math.pow(pointer.y - this.player.body.position.y , 2))
+        if (this.player.body.velocity.x == 0 && Math.abs(this.player.body.velocity.y) < 5) {
+            this.graphics.clear();
+            //if (this.playerturn % 2 == 0) {
+                this.graphics.lineStyle(1, 0xff0000);
+            /*} else {
+                this.graphics.lineStyle(1, 0x000000);
+            }*/
+            this.graphics.lineBetween(this.player.body.position.x + 15, this.player.body.position.y + 15, pointer.x + 16, pointer.y + 16);
+            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
+            this.arrow.setAngle(angle);
+        }
     }
 
     nextlevel(){

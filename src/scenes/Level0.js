@@ -8,6 +8,7 @@ class Level0 extends Phaser.Scene {
         this.load.image('title', './assets/background.png');
         this.load.image('obstacle', './assets/obstacle.png');
         this.load.image('goal', './assets/tempgoal.png');
+        this.load.image('arrow', './assets/arrow.png');
         this.load.audio('bounce', './assets/BallBounceSound.wav');
     }
 
@@ -21,7 +22,7 @@ class Level0 extends Phaser.Scene {
         this.obstacle2.angle = 90;
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
-        this.arrow = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30);
+        this.arrow = this.physics.add.sprite(720/2, 430, 'arrow').setSize(30, 30).setOrigin(-.31,.45);
         this.player = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30);
 
         this.goal1 = this.physics.add.sprite(85, 85, 'goal').setScale(0.75).setSize(30, 30);
@@ -52,8 +53,8 @@ class Level0 extends Phaser.Scene {
         } else {
             this.arrow.alpha = 0;
         }
-        this.arrow.body.position.x = this.player.body.position.x;
-        this.arrow.body.position.y = this.player.body.position.y;
+        this.arrow.body.position.x = this.player.body.position.x + 98;
+        this.arrow.body.position.y = this.player.body.position.y + 3;
         if (this.player.body.position.y > 400 && 460 > this.player.body.position.y) {
             this.player.setGravityY(0);
         } else if (this.player.body.position.y < 400) {
@@ -80,9 +81,10 @@ class Level0 extends Phaser.Scene {
         }
     }
 
-    point(pointer) {
-        var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.arrow.body.position.x, this.arrow.body.position.y, pointer.x, pointer.y);
+    point(pointer, player) {
+        var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
         this.arrow.setAngle(angle);
+        //this.arrow.scaleX = Math.sqrt(Math.pow(pointer.x - this.player.body.position.x, 2) + Math.pow(pointer.y - this.player.body.position.y , 2))
     }
 
     nextlevel(){

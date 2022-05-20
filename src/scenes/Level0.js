@@ -36,6 +36,8 @@ class Level0 extends Phaser.Scene {
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.body.maxVelocity.setTo(1500, 1500);
+
+        this.playerturn = 0;
         
         //collision
         this.player.body.setCollideWorldBounds(true);
@@ -53,6 +55,11 @@ class Level0 extends Phaser.Scene {
         } else {
             this.arrow.alpha = 0;
         }
+        /*if (this.playerturn % 2 == 0) {
+            this.arrow.setTexture('arrowp1');
+        } else {
+            this.arrow.setTexture('arrowp2');
+        }*/
         this.arrow.body.position.x = this.player.body.position.x + 98;
         this.arrow.body.position.y = this.player.body.position.y + 3;
         if (this.player.body.position.y > 400 && 460 > this.player.body.position.y) {
@@ -78,6 +85,7 @@ class Level0 extends Phaser.Scene {
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
             this.player.setVelocityY(this.slopey);
             this.player.setVelocityX(this.slopex);
+            this.playerturn++;
         }
     }
 

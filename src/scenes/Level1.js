@@ -24,8 +24,15 @@ class Level1 extends Phaser.Scene {
         this.obstacle2.angle = 90;
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
-        this.arrow = this.physics.add.sprite(720/2, 430, 'arrow').setSize(30, 30).setOrigin(-.31,.45);
-        this.player = this.physics.add.sprite(720/2, 430, 'circle').setSize(30, 30).setOrigin(.5);
+        this.playerturn = 0;
+        if (Phaser.Math.Between(1,2) == 1) {
+            this.player = this.physics.add.sprite(100, 10, 'circle').setSize(30, 30).setOrigin(.5);
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
+        } else {
+            this.player = this.physics.add.sprite(620, 870, 'circle').setSize(30, 30).setOrigin(.5);
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
+            this.playerturn++;
+        }
 
         this.goal1 = this.physics.add.sprite(360, 85, 'goal').setScale(0.75).setSize(30, 30);
         this.goal2 = this.physics.add.sprite(360, 785, 'goal').setScale(0.75).setSize(30, 30);
@@ -65,8 +72,8 @@ class Level1 extends Phaser.Scene {
         } else {
             this.arrow.setTexture('arrowp2');
         }
-        this.arrow.body.position.x = this.player.body.position.x + 53.5;
-        this.arrow.body.position.y = this.player.body.position.y - 12.5;
+        this.arrow.body.position.x = this.player.body.position.x + 98;
+        this.arrow.body.position.y = this.player.body.position.y + 3;
         if (this.player.body.position.y < 430) {
             this.player.setGravityY(-800);
         } else if (this.player.body.position.y > 430){

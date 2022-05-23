@@ -38,7 +38,6 @@ class Level1 extends Phaser.Scene {
         // create goals
         this.goal1 = this.physics.add.sprite(360, 85, 'goal').setScale(0.75).setSize(30, 30);
         this.goal2 = this.physics.add.sprite(360, 785, 'goal').setScale(0.75).setSize(30, 30);
-        this.graphics = this.add.graphics();
        
         // ball/arrow properties
         this.player.setGravityY(0);
@@ -50,6 +49,7 @@ class Level1 extends Phaser.Scene {
         this.slopex = 0.0;
         this.player.depth = 100;
         this.arrow.depth = 90;
+        this.graphics = this.add.graphics();
         
         // movement properties (change for balance)
         this.player.body.maxVelocity.setTo(1500, 1500);

@@ -42,8 +42,6 @@ class Level0 extends Phaser.Scene {
         this.player.setGravityY(0);
         this.player.body.allowRotation = true;
         this.player.body.debugShowVelocity = true;
-        this.player.setBounce(0.5);
-        this.player.setFriction(2);
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.depth = 100;
@@ -52,8 +50,10 @@ class Level0 extends Phaser.Scene {
 
         // movement properties (change for balance)
         this.player.body.maxVelocity.setTo(1500, 1500);
-        this.gravity = 800;
-        this.drag = 500;
+        this.player.setBounce(0.3);
+        this.player.setFriction(1);
+        this.gravity = 500;
+        this.drag = 700;
 
         //collision
         this.player.body.setCollideWorldBounds(true);

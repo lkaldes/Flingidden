@@ -36,6 +36,7 @@ class Level3 extends Phaser.Scene {
         this.obstacle2.body.immovable = true;
         this.obstacle3.body.immovable = true;
         this.obstacle4.body.immovable = true;
+        this.obstacle5.body.immovable = true;
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
@@ -61,6 +62,7 @@ class Level3 extends Phaser.Scene {
         this.player.depth = 100;
         this.arrow.depth = 90;
         this.graphics = this.add.graphics();
+        this.sticky = false;
         
         // movement properties (change for balance)
         this.player.body.maxVelocity.setTo(1500, 1500);
@@ -73,9 +75,9 @@ class Level3 extends Phaser.Scene {
         this.player.body.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.obstacle1);
         this.physics.add.collider(this.player, this.obstacle2);
-        this.physics.add.collider(this.player, this.obstacle3);
-        this.physics.add.collider(this.player, this.obstacle4);
-        this.physics.add.collider(this.player, this.obstacle5);
+        this.physics.add.overlap(this.player, this.obstacle3, this.stick, null, this);
+        this.physics.add.overlap(this.player, this.obstacle4, this.stick, null, this);
+        this.physics.add.overlap(this.player, this.obstacle5, this.stick, null, this);
 
         this.physics.add.overlap(this.player, this.goal1, this.nextlevel, null, this);
         this.physics.add.overlap(this.player, this.goal2, this.nextlevel, null, this);
@@ -102,10 +104,12 @@ class Level3 extends Phaser.Scene {
         this.arrow.body.position.x = this.player.body.position.x + 98;
         this.arrow.body.position.y = this.player.body.position.y + 3;
         // set gravity of ball based on side of screen
-        if (this.player.body.position.y < 430) {
-            this.player.setGravityY(-this.gravity);
-        } else if (this.player.body.position.y > 430){
-            this.player.setGravityY(this.gravity);
+        if (!this.sticky) {
+            if (this.player.body.position.y < 430) {
+                this.player.setGravityY(-this.gravity);
+            } else if (this.player.body.position.y > 430){
+                this.player.setGravityY(this.gravity);
+            }
         }
         // bounce sound
         if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (this.player.body.velocity.x != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
@@ -122,6 +126,7 @@ class Level3 extends Phaser.Scene {
     // launch mechanics chen clicked
     fling(pointer, player) {
         if (this.player.body.velocity.x == 0 && Math.abs(this.player.body.velocity.y) < 5) {
+            this.sticky = false;
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -144,6 +149,12 @@ class Level3 extends Phaser.Scene {
             var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
             this.arrow.setAngle(angle);
         }
+    }
+
+    stick() {
+        this.sticky = true;
+        this.player.setGravityY(0);
+        this.player.setVelocity(0);
     }
 
     nextlevel(){

@@ -16,7 +16,7 @@ let config = {
             debug: true
         }
     },
-    scene: [ Menu, Level0, Level1 ]
+    scene: [ Menu, Level0, Level1, Level3 ]
 }
 
 let game = new Phaser.Game(config);

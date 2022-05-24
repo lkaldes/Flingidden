@@ -42,6 +42,7 @@ class Level1 extends Phaser.Scene {
         // ball/arrow properties
         this.player.setGravityY(0);
         this.player.body.allowRotation = true;
+        this.player.body.isCircle = true;
         this.player.body.degubShowVelocity = true;
         this.slopey = 0.0;
         this.slopex = 0.0;

@@ -1,6 +1,6 @@
-class Level0 extends Phaser.Scene {
+class Level3 extends Phaser.Scene {
     constructor() {
-        super("level0Scene");
+        super("level3Scene");
     }
 
     preload(){
@@ -10,45 +10,58 @@ class Level0 extends Phaser.Scene {
         this.load.image('goal', './assets/tempgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
+        this.load.image('sticky', './assets/stickyobstacle.png')
         this.load.audio('bounce', './assets/BallBounceSound.wav');
+        
     }
 
     create(){
 
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.physics.add.sprite(100, 250, 'obstacle').setScale(4).setSize(136, 40).setOffset(-18, 81);
+        this.obstacle1 = this.physics.add.sprite(660, 200, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
         this.obstacle1.angle = 90;
-        this.obstacle2 = this.physics.add.sprite(600, 610, 'obstacle').setScale(4).setSize(115, 40).setOffset(-8, 81);
+        this.obstacle2 = this.physics.add.sprite(660, 660, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
         this.obstacle2.angle = 90;
+        this.obstacle3 = this.physics.add.sprite(285, 200, 'sticky').setScale(3).setSize(156, 40).setOffset(50, 81);
+        this.obstacle3.angle = 90;
+        this.obstacle3.setCrop(0, 0, 200, 100);
+        this.obstacle4 = this.physics.add.sprite(285, 660, 'sticky').setScale(3).setSize(156, 40).setOffset(50, 81);
+        this.obstacle4.angle = 90;
+        this.obstacle4.setCrop(0, 0, 200, 100);
+        this.obstacle5 = this.physics.add.sprite(0, 540, 'sticky').setScale(3).setSize(40, 68).setOffset(30, 32);
+        this.obstacle5.flipX = true;
+        this.obstacle5.setCrop(0, 0, 200, 100);
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
+        this.obstacle3.body.immovable = true;
+        this.obstacle4.body.immovable = true;
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.physics.add.sprite(720/2, 10, 'circle').setSize(30, 30).setOrigin(.5);
+            this.player = this.physics.add.sprite(100, 10, 'circle').setSize(30, 30).setOrigin(.5);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
         } else {
-            this.player = this.physics.add.sprite(720/2, 870, 'circle').setSize(30, 30).setOrigin(.5);
+            this.player = this.physics.add.sprite(620, 870, 'circle').setSize(30, 30).setOrigin(.5);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.physics.add.sprite(85, 85, 'goal').setScale(0.75).setSize(30, 30);
-        this.goal2 = this.physics.add.sprite(635, 785, 'goal').setScale(0.75).setSize(30, 30);
-        
+        this.goal1 = this.physics.add.sprite(660, 85, 'goal').setScale(0.75).setSize(30, 30);
+        this.goal2 = this.physics.add.sprite(660, 785, 'goal').setScale(0.75).setSize(30, 30);
+       
         // ball/arrow properties
         this.player.setGravityY(0);
         this.player.body.allowRotation = true;
         this.player.body.isCircle = true;
-        this.player.body.debugShowVelocity = true;
+        this.player.body.degubShowVelocity = true;
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.depth = 100;
         this.arrow.depth = 90;
         this.graphics = this.add.graphics();
-
+        
         // movement properties (change for balance)
         this.player.body.maxVelocity.setTo(1500, 1500);
         this.player.setBounce(0.3);
@@ -60,6 +73,10 @@ class Level0 extends Phaser.Scene {
         this.player.body.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.obstacle1);
         this.physics.add.collider(this.player, this.obstacle2);
+        this.physics.add.collider(this.player, this.obstacle3);
+        this.physics.add.collider(this.player, this.obstacle4);
+        this.physics.add.collider(this.player, this.obstacle5);
+
         this.physics.add.overlap(this.player, this.goal1, this.nextlevel, null, this);
         this.physics.add.overlap(this.player, this.goal2, this.nextlevel, null, this);
         // mouse functions
@@ -130,6 +147,6 @@ class Level0 extends Phaser.Scene {
     }
 
     nextlevel(){
-        this.scene.start("level1Scene");
+        this.scene.start("level4Scene");
     }
 }

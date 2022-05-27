@@ -1,42 +1,40 @@
-class Level3 extends Phaser.Scene {
+class Level2 extends Phaser.Scene {
     constructor() {
-        super("level3Scene");
+        super({
+            key: "level2Scene",     
+            physics: {
+                //default: 'arcade',
+                arcade: {
+                    debug: true
+                },
+                matter: {
+                    debug: true
+                }
+            }
+        });
     }
 
     preload(){
         this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/background.png');
-        this.load.image('obstacle', './assets/obstacle.png');
+        this.load.image('square', './assets/square.png');
+        this.load.image('triangle', './assets/triangle.png');
         this.load.image('goal', './assets/tempgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
-        this.load.image('sticky', './assets/stickyobstacle.png')
         this.load.audio('bounce', './assets/BallBounceSound.wav');
         
     }
 
     create(){
 
+        this.matter.world.disableGravity();
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.physics.add.sprite(660, 200, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle1.angle = 90;
-        this.obstacle2 = this.physics.add.sprite(660, 660, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle2.angle = 90;
-        this.obstacle3 = this.physics.add.sprite(285, 200, 'sticky').setScale(3).setSize(156, 40).setOffset(50, 81);
-        this.obstacle3.angle = 90;
-        this.obstacle3.setCrop(0, 0, 200, 100);
-        this.obstacle4 = this.physics.add.sprite(285, 660, 'sticky').setScale(3).setSize(156, 40).setOffset(50, 81);
-        this.obstacle4.angle = 90;
-        this.obstacle4.setCrop(0, 0, 200, 100);
-        this.obstacle5 = this.physics.add.sprite(0, 540, 'sticky').setScale(3).setSize(40, 68).setOffset(30, 32);
-        this.obstacle5.flipX = true;
-        this.obstacle5.setCrop(0, 0, 200, 100);
+        this.obstacle1 = this.matter.add.sprite(360, 200, 'square', null, { isStatic: true }).setScale(2).setAngle(45);
+        this.obstacle2 = this.matter.add.sprite(360, 660, 'square').setScale(2).setAngle(45);
         this.obstacle1.body.immovable = true;
         this.obstacle2.body.immovable = true;
-        this.obstacle3.body.immovable = true;
-        this.obstacle4.body.immovable = true;
-        this.obstacle5.body.immovable = true;
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
@@ -49,20 +47,19 @@ class Level3 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.physics.add.sprite(660, 85, 'goal').setScale(0.75).setSize(30, 30);
-        this.goal2 = this.physics.add.sprite(660, 785, 'goal').setScale(0.75).setSize(30, 30);
+        this.goal1 = this.physics.add.sprite(660, 75, 'goal').setScale(0.75).setSize(30, 30);
+        this.goal2 = this.physics.add.sprite(60, 795, 'goal').setScale(0.75).setSize(30, 30);
        
         // ball/arrow properties
         this.player.setGravityY(0);
         this.player.body.allowRotation = true;
-        x
+        //this.player.body.isCircle = true;
         this.player.body.degubShowVelocity = true;
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.depth = 100;
         this.arrow.depth = 90;
         this.graphics = this.add.graphics();
-        this.sticky = false;
         
         // movement properties (change for balance)
         this.player.body.maxVelocity.setTo(1500, 1500);
@@ -75,9 +72,6 @@ class Level3 extends Phaser.Scene {
         this.player.body.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.obstacle1);
         this.physics.add.collider(this.player, this.obstacle2);
-        this.physics.add.overlap(this.player, this.obstacle3, this.stick, null, this);
-        this.physics.add.overlap(this.player, this.obstacle4, this.stick, null, this);
-        this.physics.add.overlap(this.player, this.obstacle5, this.stick, null, this);
 
         this.physics.add.overlap(this.player, this.goal1, this.nextlevel, null, this);
         this.physics.add.overlap(this.player, this.goal2, this.nextlevel, null, this);
@@ -104,12 +98,10 @@ class Level3 extends Phaser.Scene {
         this.arrow.body.position.x = this.player.body.position.x + 98;
         this.arrow.body.position.y = this.player.body.position.y + 3;
         // set gravity of ball based on side of screen
-        if (!this.sticky) {
-            if (this.player.body.position.y < 430) {
-                this.player.setGravityY(-this.gravity);
-            } else if (this.player.body.position.y > 430){
-                this.player.setGravityY(this.gravity);
-            }
+        if (this.player.body.position.y < 430) {
+            this.player.setGravityY(-this.gravity);
+        } else if (this.player.body.position.y > 430){
+            this.player.setGravityY(this.gravity);
         }
         // bounce sound
         if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (this.player.body.velocity.x != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
@@ -126,7 +118,6 @@ class Level3 extends Phaser.Scene {
     // launch mechanics chen clicked
     fling(pointer, player) {
         if (this.player.body.velocity.x == 0 && Math.abs(this.player.body.velocity.y) < 5) {
-            this.sticky = false;
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -151,13 +142,7 @@ class Level3 extends Phaser.Scene {
         }
     }
 
-    stick() {
-        this.sticky = true;
-        this.player.setGravityY(0);
-        this.player.setVelocity(0);
-    }
-
     nextlevel(){
-        this.scene.start("level4Scene");
+        this.scene.start("level3Scene");
     }
 }

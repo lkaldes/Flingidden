@@ -45,10 +45,10 @@ class Level2 extends Phaser.Scene {
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, 'circle');
+            this.player = this.matter.add.sprite(100, 10, 'circle').setOrigin(.5).setSize(30, 30);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, 'circle');
+            this.player = this.matter.add.sprite(620, 870, 'circle').setOrigin(.5).setSize(30, 30);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
             this.playerturn++;
         }
@@ -58,8 +58,6 @@ class Level2 extends Phaser.Scene {
         this.goal2 = this.physics.add.sprite(60, 795, 'goal').setScale(0.75).setSize(30, 30);
        
         // ball/arrow properties
-        //this.player.setGravityY(0);
-        //this.player.body.isCircle = true;
         this.slopey = 0.0;
         this.slopex = 0.0;
         this.player.depth = 100;
@@ -70,15 +68,9 @@ class Level2 extends Phaser.Scene {
         this.player.setBounce(1);
         this.player.setFrictionAir(.05);
         this.gravity = .5;
-        //this.drag = 700;
 
         //collision
-        //this.player.body.setBounds();
-        //this.physics.add.collider(this.player, this.obstacle1);
-        //this.physics.add.collider(this.player, this.obstacle2);
-
-        //this.physics.add.overlap(this.player, this.goal1, this.nextlevel, null, this);
-        //this.physics.add.overlap(this.player, this.goal2, this.nextlevel, null, this);
+        
         // mouse functions
         this.input.on('pointerup', this.fling.bind(this));
         this.input.on('pointermove', this.point, this);

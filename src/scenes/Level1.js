@@ -72,6 +72,7 @@ class Level1 extends Phaser.Scene {
         this.gravity = 0.3;
 
         //collision
+        this.matter.world.on('collisionstart', this.collision.bind(this));
         
         // mouse functions
         this.input.on('pointerup', this.fling.bind(this));
@@ -138,6 +139,10 @@ class Level1 extends Phaser.Scene {
             var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
             this.arrow.setAngle(angle);
         }
+    }
+
+    collision(bodyA, bodyB) {
+        this.sound.play('bounce');
     }
 
     nextlevel(){

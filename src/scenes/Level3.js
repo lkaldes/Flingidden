@@ -82,6 +82,7 @@ class Level3 extends Phaser.Scene {
         this.gravity = 0.3;
 
         //collision
+        this.matter.world.on('collisionstart', this.collision.bind(this));
         
         // mouse functions
         this.input.on('pointerup', this.fling.bind(this));
@@ -156,6 +157,10 @@ class Level3 extends Phaser.Scene {
         this.sticky = true;
         this.player.setGravityY(0);
         this.player.setVelocity(0);
+    }
+
+    collision(bodyA, bodyB) {
+        this.sound.play('bounce');
     }
 
     nextlevel(){

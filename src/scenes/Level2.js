@@ -63,8 +63,8 @@ class Level2 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(360, 85, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(360, 785, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(660, 85, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(60, 785, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
         // ball/arrow properties
         this.slopey = 0.0;
@@ -119,17 +119,7 @@ class Level2 extends Phaser.Scene {
         } else if (this.player.body.position.y > 430){
             this.matter.world.setGravity(0, this.gravity);
         }
-        /*
-        // bounce sound
-        if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (Math.abs(this.player.body.velocity.x) != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
-            this.sound.play('bounce');
-        }
-        // prevent sliding when touching surface
-        if (this.player.body.blocked.down || this.player.body.blocked.up) {
-            this.player.frictionAirX(this.drag);
-        } else {
-            this.player.frictionAirX(0);
-        }*/
+
     }
 
     // launch mechanics chen clicked

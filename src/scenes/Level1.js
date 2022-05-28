@@ -115,33 +115,23 @@ class Level1 extends Phaser.Scene {
         } else if (this.player.body.position.y > 430){
             this.matter.world.setGravity(0, this.gravity);
         }
-        /*
-        // bounce sound
-        if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (Math.abs(this.player.body.velocity.x) != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
-            this.sound.play('bounce');
-        }
-        // prevent sliding when touching surface
-        if (this.player.body.blocked.down || this.player.body.blocked.up) {
-            this.player.frictionAirX(this.drag);
-        } else {
-            this.player.frictionAirX(0);
-        }*/
+
     }
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
-            this.player.setVelocity(this.slopex / 50, this.slopey / 50);
+            this.player.setVelocity(this.slopex / 75, this.slopey / 75);
             this.playerturn++;
         }
     }
 
     // arrow pointing when mouse moves
     point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.graphics.clear();
             if (this.playerturn % 2 == 0) {
                 this.graphics.lineStyle(1, 0xd50000);

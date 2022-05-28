@@ -31,33 +31,33 @@ class Level1 extends Phaser.Scene {
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
         this.load.audio('bounce', './assets/BallBounceSound.wav');
+
+        this.load.json('shapes', 'assets/Shapes.json');
         
     }
 
     create(){
 
+        this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.physics.add.sprite(360, 200, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle1.angle = 90;
-        this.obstacle2 = this.physics.add.sprite(360, 660, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle2.angle = 90;
-        this.obstacle1.body.immovable = true;
-        this.obstacle2.body.immovable = true;
+        this.obstacle1 = this.matter.add.sprite(360, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(360, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
+
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, 'circle').setOrigin(.5).setSize(30, 30);
+            this.player = this.matter.add.sprite(100, 10, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, 'circle').setOrigin(.5).setSize(30, 30);
+            this.player = this.matter.add.sprite(620, 870, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.physics.add.sprite(360, 85, 'goal').setScale(0.75).setSize(30, 30);
-        this.goal2 = this.physics.add.sprite(360, 785, 'goal').setScale(0.75).setSize(30, 30);
+        this.goal1 = this.matter.add.sprite(360, 85, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(360, 785, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal }).setScale(0.75);
        
         // ball/arrow properties
         this.slopey = 0.0;
@@ -67,9 +67,9 @@ class Level1 extends Phaser.Scene {
         this.graphics = this.add.graphics();
         
         // movement properties (change for balance)
-        this.player.setBounce(.8);
+        this.player.setBounce(0.8);
         this.player.setFriction(1);
-        this.gravity = .5;
+        this.gravity = 0.3;
 
         //collision
         

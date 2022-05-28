@@ -33,16 +33,17 @@ class Level3 extends Phaser.Scene {
         this.load.image('sticky', './assets/stickyobstacle.png')
         this.load.audio('bounce', './assets/BallBounceSound.wav');
         
+        this.load.json('shapes', 'assets/Shapes.json');
     }
 
     create(){
 
+        this.shapes = this.cache.json.get('shapes');
+
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.physics.add.sprite(660, 200, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle1.angle = 90;
-        this.obstacle2 = this.physics.add.sprite(660, 660, 'obstacle').setScale(3).setSize(126, 40).setOffset(-8, 81);
-        this.obstacle2.angle = 90;
+        this.obstacle1 = this.matter.add.sprite(660, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(660, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
         this.obstacle3 = this.physics.add.sprite(285, 200, 'sticky').setScale(3).setSize(156, 40).setOffset(50, 81);
         this.obstacle3.angle = 90;
         this.obstacle3.setCrop(0, 0, 200, 100);
@@ -52,25 +53,21 @@ class Level3 extends Phaser.Scene {
         this.obstacle5 = this.physics.add.sprite(0, 540, 'sticky').setScale(3).setSize(40, 68).setOffset(30, 32);
         this.obstacle5.flipX = true;
         this.obstacle5.setCrop(0, 0, 200, 100);
-        this.obstacle1.body.immovable = true;
-        this.obstacle2.body.immovable = true;
-        this.obstacle3.body.immovable = true;
-        this.obstacle4.body.immovable = true;
-        this.obstacle5.body.immovable = true;
+
         this.playerturn = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, 'circle').setOrigin(.5).setSize(30, 30);
+            this.player = this.matter.add.sprite(100, 10, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, 'circle').setOrigin(.5).setSize(30, 30);
+            this.player = this.matter.add.sprite(620, 870, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.physics.add.sprite(660, 85, 'goal').setScale(0.75).setSize(30, 30);
-        this.goal2 = this.physics.add.sprite(660, 785, 'goal').setScale(0.75).setSize(30, 30);
+        this.goal1 = this.matter.add.sprite(360, 85, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(360, 785, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal }).setScale(0.75);
        
         // ball/arrow properties
         this.slopey = 0.0;
@@ -80,9 +77,9 @@ class Level3 extends Phaser.Scene {
         this.graphics = this.add.graphics();
         
         // movement properties (change for balance)
-        this.player.setBounce(.8);
+        this.player.setBounce(0.8);
         this.player.setFriction(1);
-        this.gravity = .5;
+        this.gravity = 0.3;
 
         //collision
         
@@ -93,7 +90,7 @@ class Level3 extends Phaser.Scene {
 
     update(){
         // show/hide arrow whether ball is moving or not
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.arrow.alpha = 100;
         } else {
             this.graphics.clear();
@@ -131,7 +128,7 @@ class Level3 extends Phaser.Scene {
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -142,7 +139,7 @@ class Level3 extends Phaser.Scene {
 
     // arrow pointing when mouse moves
     point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.graphics.clear();
             if (this.playerturn % 2 == 0) {
                 this.graphics.lineStyle(1, 0xd50000);

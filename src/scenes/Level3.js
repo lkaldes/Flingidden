@@ -27,7 +27,8 @@ class Level3 extends Phaser.Scene {
         this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/background.png');
         this.load.image('obstacle', './assets/obstacle.png');
-        this.load.image('goal', './assets/tempgoal.png');
+        this.load.image('goal1', './assets/tempgoal.png');
+        this.load.image('goal2', './assets/tempgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
         this.load.image('sticky', './assets/stickyobstacle.png')
@@ -55,6 +56,8 @@ class Level3 extends Phaser.Scene {
         this.obstacle5.setCrop(0, 0, 200, 100);
 
         this.playerturn = 0;
+        this.player1score = 0;
+        this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
             this.player = this.matter.add.sprite(100, 10, 'circle', null, { shape: this.shapes.circle });
@@ -66,8 +69,8 @@ class Level3 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(360, 85, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(360, 785, 'goal', null, { isStatic: true, shape: this.shapes.tempgoal }).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(360, 85, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(360, 785, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
        
         // ball/arrow properties
         this.slopey = 0.0;
@@ -82,7 +85,17 @@ class Level3 extends Phaser.Scene {
         this.gravity = 0.3;
 
         //collision
-        this.matter.world.on('collisionstart', this.collision.bind(this));
+        this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+            if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
+                this.player1score++;
+                this.nextlevel();
+            } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
+                this.player2score++;
+                this.nextlevel();
+            } else {
+                this.sound.play('bounce');
+            }
+        }.bind(this));
         
         // mouse functions
         this.input.on('pointerup', this.fling.bind(this));
@@ -157,10 +170,6 @@ class Level3 extends Phaser.Scene {
         this.sticky = true;
         this.player.setGravityY(0);
         this.player.setVelocity(0);
-    }
-
-    collision(bodyA, bodyB) {
-        this.sound.play('bounce');
     }
 
     nextlevel(){

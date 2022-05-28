@@ -68,8 +68,8 @@ class Level2 extends Phaser.Scene {
         this.graphics = this.add.graphics();
         
         // movement properties (change for balance)
-        this.player.setBounce(1);
-        this.player.setFrictionAir(.05);
+        this.player.setBounce(.8);
+        this.player.setFriction(1);
         this.gravity = .5;
 
         //collision
@@ -81,14 +81,14 @@ class Level2 extends Phaser.Scene {
 
     update(){
         // show/hide arrow whether ball is moving or not
-        if (this.player.body.velocity.x < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
             this.arrow.alpha = 100;
         } else {
             this.graphics.clear();
             this.arrow.alpha = 0;
         }
         // change arrow color based on player turn
-        if (this.playerturn % 2 == 0) {
+        if (this.playerturn % 2 < .1) {
             this.arrow.setTexture('arrowp1');
         } else {
             this.arrow.setTexture('arrowp2');
@@ -104,7 +104,7 @@ class Level2 extends Phaser.Scene {
         }
         /*
         // bounce sound
-        if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (this.player.body.velocity.x != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
+        if ((this.player.body.blocked.down || this.player.body.blocked.left || this.player.body.blocked.right || this.player.body.blocked.up) && (Math.abs(this.player.body.velocity.x) != 0 && Math.abs(this.player.body.velocity.y) >= 5)) {
             this.sound.play('bounce');
         }
         // prevent sliding when touching surface
@@ -118,7 +118,7 @@ class Level2 extends Phaser.Scene {
     // launch mechanics chen clicked
     fling(pointer, player) {
         //this.player.setVelocity(10,10);
-        if (this.player.body.velocity.x < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -129,9 +129,9 @@ class Level2 extends Phaser.Scene {
 
     // arrow pointing when mouse moves
     point(pointer, player) {
-        if (this.player.body.velocity.x < .1 && Math.abs(this.player.body.velocity.y) < .1) {
+        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < .1) {
             this.graphics.clear();
-            if (this.playerturn % 2 == 0) {
+            if (this.playerturn % 2 < .1) {
                 this.graphics.lineStyle(1, 0xd50000);
             } else {
                 this.graphics.lineStyle(1, 0x2195f3);

@@ -4,7 +4,18 @@ class Menu extends Phaser.Scene {
     }
     
     preload(){
+        this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/background.png');
+        this.load.image('obstacle', './assets/obstacle.png');
+        this.load.image('square', './assets/square.png');
+        this.load.image('triangle', './assets/triangle.png');
+        this.load.image('eqtriangle', './assets/equaltriangle.png');
+        this.load.image('sticky', './assets/horizontal_slime.png')
+        this.load.image('goal1', './assets/tempgoal.png');
+        this.load.image('goal2', './assets/tempgoal.png');
+        this.load.image('arrowp2', './assets/blueArrow.png');
+        this.load.image('arrowp1', './assets/redArrow.png');
+        this.load.audio('bounce', './assets/BallBounceSound.wav');
     }
 
     create(){
@@ -20,7 +31,7 @@ class Menu extends Phaser.Scene {
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level3Scene');    
+            this.scene.start('level6Scene');    
         }
     }
 

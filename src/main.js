@@ -14,9 +14,12 @@ let config = {
         default: 'arcade',
         arcade: {
             debug: true
+        },
+        matter: {
+            debug: true
         }
     },
-    scene: [ Menu, Level0, Level1, Level3 ]
+    scene: [ Menu, Level0, Level1, Level2, Level3, Level4, Level5, Level6, Level7 ]//, Level8. Level9, Level10]
 }
 
 let game = new Phaser.Game(config);

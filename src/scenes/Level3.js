@@ -50,8 +50,8 @@ class Level3 extends Phaser.Scene {
         this.obstacle2extend = this.matter.add.sprite(450, 680, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
         this.obstacle3 = this.matter.add.sprite(0, 470, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
 
-        this.sticky1 = this.matter.add.sprite(385, 277, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3);
-        this.sticky2 = this.matter.add.sprite(385, 625, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3);
+        this.sticky1 = this.matter.add.sprite(385, 275, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3);
+        this.sticky2 = this.matter.add.sprite(385, 615, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setOrigin(0.5,0.44);
         this.sticky2.flipY = true;
         this.sticky3 = this.matter.add.sprite(37, 470, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setAngle(270);
 
@@ -61,11 +61,11 @@ class Level3 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(620, 10, 'circle', null, { shape: this.shapes.circle });
-            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
+            this.player = this.matter.add.sprite(120, 10, 'circle', null, { shape: this.shapes.circle });
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, 'circle', null, { shape: this.shapes.circle });
-            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
+            this.player = this.matter.add.sprite(120, 870, 'circle', null, { shape: this.shapes.circle });
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
 

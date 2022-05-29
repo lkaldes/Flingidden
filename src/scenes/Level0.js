@@ -24,16 +24,6 @@ class Level0 extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('circle', './assets/circle.png');
-        this.load.image('title', './assets/background.png');
-        this.load.image('obstacle', './assets/obstacle.png');
-        this.load.image('obstacle', './assets/obstacle.png');
-        this.load.image('goal1', './assets/tempgoal.png');
-        this.load.image('goal2', './assets/tempgoal.png');
-        this.load.image('arrowp2', './assets/blueArrow.png');
-        this.load.image('arrowp1', './assets/redArrow.png');
-        this.load.audio('bounce', './assets/BallBounceSound.wav');
-
         this.load.json('shapes', 'assets/Shapes.json');
     }
 
@@ -43,20 +33,21 @@ class Level0 extends Phaser.Scene {
 
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        
         this.obstacle1 = this.matter.add.sprite(100, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(600, 630, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
 
+        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
             this.player = this.matter.add.sprite(130, 40, 'circle', null, { shape: this.shapes.circle });
-            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
             this.player = this.matter.add.sprite(590, 870, 'circle', null, { shape: this.shapes.circle });
-            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
+            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
 
@@ -74,7 +65,7 @@ class Level0 extends Phaser.Scene {
         // movement properties (change for balance)
         this.player.setBounce(0.8);
         this.player.setFriction(1);
-        this.gravity = 0.7;
+        this.gravity = 0.5;
 
         //collision
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
@@ -96,7 +87,7 @@ class Level0 extends Phaser.Scene {
 
     update(){
         // show/hide arrow whether ball is moving or not
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.arrow.alpha = 100;
         } else {
             this.graphics.clear();
@@ -122,7 +113,7 @@ class Level0 extends Phaser.Scene {
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -133,7 +124,7 @@ class Level0 extends Phaser.Scene {
 
     // arrow pointing when mouse moves
     point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.graphics.clear();
             if (this.playerturn % 2 == 0) {
                 this.graphics.lineStyle(10, 0xd50000);

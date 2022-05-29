@@ -93,6 +93,10 @@ class Level3 extends Phaser.Scene {
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player2score++;
                 this.nextlevel();
+            } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {
+                this.sticky = true;
+                this.matter.world.setGravity(0, 0);
+                this.player.setVelocity(0);
             } else {
                 this.sound.play('bounce');
             }
@@ -122,11 +126,15 @@ class Level3 extends Phaser.Scene {
         this.arrow.body.position.y = this.player.body.position.y - 12;
         // set gravity of ball based on side of screen
         if (!this.sticky) {
+            this.player.setFriction(1);
             if (this.player.body.position.y < 430) {
                 this.matter.world.setGravity(0, -this.gravity);
             } else if (this.player.body.position.y > 430){
                 this.matter.world.setGravity(0, this.gravity);
             }
+        } else {
+            this.matter.world.setGravity(0, 0);
+            this.player.setVelocity(0);
         }
 
     }
@@ -135,6 +143,7 @@ class Level3 extends Phaser.Scene {
     fling(pointer, player) {
         if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.graphics.clear();
+            this.sticky = false;
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
             this.player.setVelocity(this.slopex / 75, this.slopey / 75);
@@ -155,12 +164,6 @@ class Level3 extends Phaser.Scene {
             var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
             this.arrow.setAngle(angle);
         }
-    }
-
-    stick() {
-        this.sticky = true;
-        this.player.setGravityY(0);
-        this.player.setVelocity(0);
     }
 
     nextlevel(){

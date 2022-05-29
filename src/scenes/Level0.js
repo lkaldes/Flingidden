@@ -27,6 +27,7 @@ class Level0 extends Phaser.Scene {
         this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/background.png');
         this.load.image('obstacle', './assets/obstacle.png');
+        this.load.image('obstacle', './assets/obstacle.png');
         this.load.image('goal1', './assets/tempgoal.png');
         this.load.image('goal2', './assets/tempgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
@@ -39,27 +40,29 @@ class Level0 extends Phaser.Scene {
     create(){
 
         this.shapes = this.cache.json.get('shapes');
+
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.matter.add.sprite(100, 250, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
-        this.obstacle2 = this.matter.add.sprite(600, 610, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(100, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(600, 630, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
 
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(130, 40, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-.31,.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(590, 870, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-.31,.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(60, 85, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(660, 785, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(60, 95, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(660, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
         // ball/arrow properties
         this.slopey = 0.0;

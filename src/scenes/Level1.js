@@ -42,7 +42,8 @@ class Level1 extends Phaser.Scene {
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.obstacle1 = this.matter.add.sprite(360, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(360, 220, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(360, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
 
         this.playerturn = 0;
@@ -59,7 +60,7 @@ class Level1 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(360, 85, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(360, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         this.goal2 = this.matter.add.sprite(360, 785, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
        
         // ball/arrow properties

@@ -1,4 +1,4 @@
-# Ghost Hunter
+# Flingidden
 
 ## Controls
 

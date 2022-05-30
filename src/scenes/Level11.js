@@ -1,7 +1,7 @@
-class Level10 extends Phaser.Scene {
+class Level11 extends Phaser.Scene {
     constructor() {
         super({
-            key: "level10Scene",     
+            key: "level11Scene",     
             physics: {
                 //default: 'arcade',
                 arcade: {
@@ -33,25 +33,13 @@ class Level10 extends Phaser.Scene {
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        
-        this.obstacle1 = this.matter.add.sprite(550, 580, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5);
-        this.obstacle2 = this.matter.add.sprite(450, 220, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);
-        this.obstacle3 = this.matter.add.sprite(550, 300, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(180);
-        this.obstacle4 = this.matter.add.sprite(450, 660, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);
 
-        this.obstacle5 = this.matter.add.sprite(640, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle6 = this.matter.add.sprite(80, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle5extend = this.matter.add.sprite(540, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle6extend = this.matter.add.sprite(180, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(660, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(360, 680, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
+        this.obstacle1extend = this.matter.add.sprite(360, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
+        this.obstacle2extend = this.matter.add.sprite(50, 680, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
 
-        this.obstacle7 = this.matter.add.sprite(500, 20, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
-        this.obstacle8 = this.matter.add.sprite(500, 860, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
-        this.obstacle9 = this.matter.add.sprite(730, 220, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle10 = this.matter.add.sprite(730, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-
-        this.obstacleside = this.matter.add.sprite(10, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3);
-        this.sticky1 = this.matter.add.sprite(69, 570, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setAngle(90);
-        this.sticky2 = this.matter.add.sprite(69, 350, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setAngle(90);
+        this.windmill = this.matter.add.sprite(360, 440, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(8);
 
         this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
@@ -69,7 +57,7 @@ class Level10 extends Phaser.Scene {
 
         // create goals
         this.goal1 = this.matter.add.sprite(660, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(660, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(60, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
                // ball/arrow properties
                this.slopey = 0.0;
@@ -134,7 +122,8 @@ class Level10 extends Phaser.Scene {
                    this.matter.world.setGravity(0, 0);
                    this.player.setVelocity(0);
                }
-       
+               
+               this.windmill.angle += 1;
            }
        
            // launch mechanics chen clicked
@@ -165,6 +154,6 @@ class Level10 extends Phaser.Scene {
            }
        
     nextlevel(){
-        this.scene.start("level11Scene");
+        this.scene.start("level12Scene");
     }
 }

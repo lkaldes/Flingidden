@@ -11,6 +11,7 @@ class Menu extends Phaser.Scene {
         this.load.image('square', './assets/square.png');
         this.load.image('triangle', './assets/triangle.png');
         this.load.image('eqtriangle', './assets/equaltriangle.png');
+        this.load.image('windmill', './assets/windmill.png');
         this.load.image('sticky', './assets/horizontal_slime.png')
         this.load.image('goal1', './assets/tempgoal.png');
         this.load.image('goal2', './assets/tempgoal.png');
@@ -32,7 +33,7 @@ class Menu extends Phaser.Scene {
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level0Scene');    
+            this.scene.start('level12Scene');    
         }
     }
 

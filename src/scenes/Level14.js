@@ -1,7 +1,7 @@
-class Level13 extends Phaser.Scene {
+class Level14 extends Phaser.Scene {
     constructor() {
         super({
-            key: "level13Scene",     
+            key: "level14Scene",     
             physics: {
                 //default: 'arcade',
                 arcade: {
@@ -34,16 +34,15 @@ class Level13 extends Phaser.Scene {
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
 
-        this.obstacle1 = this.matter.add.sprite(640, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle2 = this.matter.add.sprite(80, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle1extend = this.matter.add.sprite(540, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle2extend = this.matter.add.sprite(180, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(600, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(120, 240, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1extend = this.matter.add.sprite(350, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle2extend = this.matter.add.sprite(370, 240, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
 
-        this.stickywindmill1 = this.matter.add.sprite(200, 640, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
-        this.stickywindmill2 = this.matter.add.sprite(520, 640, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
-        this.stickywindmill3 = this.matter.add.sprite(360, 135, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(4);
+        this.stickywindmill1 = this.matter.add.sprite(360, 450, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
+        this.windmill2 = this.matter.add.sprite(180, 120, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(3);
+        this.windmill3 = this.matter.add.sprite(540, 780, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(3);
 
-        //this.sticky1 = this.matter.add.sprite(160, 570, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setAngle(55);
 
         this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
@@ -51,7 +50,7 @@ class Level13 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(360, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(360, 70, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
             this.player = this.matter.add.sprite(360, 870, 'circle', null, { shape: this.shapes.circle });
@@ -60,8 +59,8 @@ class Level13 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(660, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(60, 105, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(75, 70, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(645, 835, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
                // ball/arrow properties
                this.slopey = 0.0;
@@ -132,8 +131,8 @@ class Level13 extends Phaser.Scene {
                }
                
                this.stickywindmill1.angle += 1;
-               this.stickywindmill2.angle += 1;
-               this.windmill3.angle += 1;
+               this.windmill2.angle -= 1;
+               this.windmill3.angle -= 1;
            }
        
            // launch mechanics chen clicked
@@ -164,6 +163,6 @@ class Level13 extends Phaser.Scene {
            }
        
     nextlevel(){
-        this.scene.start("level14Scene");
+        this.scene.start("level15Scene");
     }
 }

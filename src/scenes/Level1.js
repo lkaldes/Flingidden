@@ -31,7 +31,7 @@ class Level1 extends Phaser.Scene {
 
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'kitchen').setOrigin(0, 0);
         
         this.obstacle1 = this.matter.add.sprite(360, 220, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(360, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);

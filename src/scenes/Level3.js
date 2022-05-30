@@ -32,7 +32,7 @@ class Level3 extends Phaser.Scene {
         this.shapes = this.cache.json.get('shapes');
 
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'kitchen').setOrigin(0, 0);
         
         this.obstacle1 = this.matter.add.sprite(550, 220, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);
         this.obstacle1extend = this.matter.add.sprite(450, 220, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3).setAngle(90);

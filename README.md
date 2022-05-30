@@ -2,10 +2,8 @@
 
 ## Controls
 
-- (W): Jump
-- (F): Shoot
-- (M): Menu when game over
-- (R): Restart when game over
+- (W): To start game
+- (Mouse): To Launch Ball and select levels
 
 ## Credits
 

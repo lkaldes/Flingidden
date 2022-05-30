@@ -132,7 +132,7 @@ class Level15 extends Phaser.Scene {
                }
               */ 
                this.windmill1.angle += 1;
-               this.windmill2.angle += 1;
+               this.windmill2.angle += 2;
                this.windmill3.angle += 1;
                this.windmill4.angle += 1;
                this.windmill5.angle += 1;

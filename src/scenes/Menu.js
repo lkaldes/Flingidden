@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.image('title', './assets/background.png');
         this.load.image('kitchen', './assets/KB.png');
         this.load.image('obstacle', './assets/obstacle.png');
+        this.load.image('circleobstacle', './assets/circleobstacle.png');
         this.load.image('square', './assets/square.png');
         this.load.image('triangle', './assets/triangle.png');
         this.load.image('eqtriangle', './assets/equaltriangle.png');
@@ -34,7 +35,7 @@ class Menu extends Phaser.Scene {
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level15Scene');    
+            this.scene.start('level16Scene');    
         }
     }
 

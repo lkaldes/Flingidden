@@ -103,7 +103,7 @@ class Level13 extends Phaser.Scene {
        
            update(){
                // show/hide arrow whether ball is moving or not
-               if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+               if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
                    this.arrow.alpha = 100;
                } else {
                    this.graphics.clear();

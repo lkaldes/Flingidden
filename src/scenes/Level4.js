@@ -116,7 +116,7 @@ class Level4 extends Phaser.Scene {
     // launch mechanics chen clicked
     fling(pointer, player) {
         //this.player.setVelocity(10,10);
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
@@ -127,7 +127,7 @@ class Level4 extends Phaser.Scene {
 
     // arrow pointing when mouse moves
     point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.graphics.clear();
             if (this.playerturn % 2 == 0) {
                 this.graphics.lineStyle(10, 0xd50000);

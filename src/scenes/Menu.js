@@ -35,7 +35,7 @@ class Menu extends Phaser.Scene {
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level16Scene');    
+            this.scene.start('level20Scene');    
         }
     }
 

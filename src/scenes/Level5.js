@@ -45,7 +45,7 @@ class Level5 extends Phaser.Scene {
         this.sticky2 = this.matter.add.sprite(360, 470, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setOrigin(0.5, 0.52);
         this.sticky1.flipY = true;
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
@@ -62,6 +62,14 @@ class Level5 extends Phaser.Scene {
         // create goals
         this.goal1 = this.matter.add.sprite(40, 95, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         this.goal2 = this.matter.add.sprite(680, 815, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        
+        // UI properties
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5);
+        this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5);
+        this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         
         // ball/arrow properties
         this.slopey = 0.0;

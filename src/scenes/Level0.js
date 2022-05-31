@@ -37,7 +37,6 @@ class Level0 extends Phaser.Scene {
         this.obstacle1 = this.matter.add.sprite(100, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(600, 630, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
@@ -56,8 +55,9 @@ class Level0 extends Phaser.Scene {
         this.goal2 = this.matter.add.sprite(660, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
         // UI properties
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5);
-        this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5);
         this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
@@ -129,7 +129,7 @@ class Level0 extends Phaser.Scene {
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);

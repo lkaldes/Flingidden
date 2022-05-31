@@ -35,8 +35,8 @@ class Level10 extends Phaser.Scene {
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         
         this.obstacle1 = this.matter.add.sprite(550, 580, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5);
-        this.obstacle2 = this.matter.add.sprite(450, 220, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);
-        this.obstacle3 = this.matter.add.sprite(550, 300, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(180);
+        this.obstacle2 = this.matter.add.sprite(450, 250, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);
+        this.obstacle3 = this.matter.add.sprite(550, 330, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(180);
         this.obstacle4 = this.matter.add.sprite(450, 660, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);
 
         this.obstacle5 = this.matter.add.sprite(640, 460, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);

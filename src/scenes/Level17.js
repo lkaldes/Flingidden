@@ -34,7 +34,7 @@ class Level17 extends Phaser.Scene {
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         
-        this.obstacle1 = this.matter.add.sprite(360, 440, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+        //this.obstacle1 = this.matter.add.sprite(360, 440, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
 
         this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
@@ -42,10 +42,10 @@ class Level17 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(120, 10, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(20, 440, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(120, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(20, 440, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
@@ -108,10 +108,10 @@ class Level17 extends Phaser.Scene {
         // set gravity of ball based on side of screen
         if (!this.sticky) {
             this.player.setFriction(1);
-            if (this.player.body.position.y < 430) {
-                this.matter.world.setGravity(0, -this.gravity);
-            } else if (this.player.body.position.y > 430){
-                this.matter.world.setGravity(0, this.gravity);
+            if (this.player.body.position.x < 360) {
+                this.matter.world.setGravity(-this.gravity, 0);
+            } else if (this.player.body.position.x > 360){
+                this.matter.world.setGravity(this.gravity, 0);
             }
         } else {
             this.matter.world.setGravity(0, 0);

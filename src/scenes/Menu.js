@@ -7,16 +7,18 @@ class Menu extends Phaser.Scene {
         this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/background.png');
         this.load.image('kitchen', './assets/KB.png');
-        this.load.image('obstacle', './assets/obstacle.png');
-        this.load.image('circleobstacle', './assets/circleobstacle.png');
+        this.load.image('garden', './assets/gardenbackground.png');
+        this.load.image('obstacle', './assets/woodRectangle.png');
+        this.load.image('header', './assets/obstacle.png');
+        this.load.image('circleobstacle', './assets/woodcircle.png');
         this.load.image('square', './assets/square.png');
-        this.load.image('triangle', './assets/triangle.png');
+        this.load.image('triangle', './assets/woodtriangle.png');
         this.load.image('eqtriangle', './assets/equaltriangle.png');
         this.load.image('windmill', './assets/windmill.png');
         this.load.image('stickywindmill', './assets/stickywindmill.png');
         this.load.image('sticky', './assets/horizontal_slime.png')
-        this.load.image('goal1', './assets/tempgoal.png');
-        this.load.image('goal2', './assets/tempgoal.png');
+        this.load.image('goal1', './assets/bluegoal.png');
+        this.load.image('goal2', './assets/redgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
         this.load.audio('bounce', './assets/BallBounceSound.wav');
@@ -35,7 +37,7 @@ class Menu extends Phaser.Scene {
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level13Scene');    
+            this.scene.start('level17Scene');    
         }
     }
 

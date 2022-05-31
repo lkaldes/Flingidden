@@ -43,7 +43,7 @@ class Level7 extends Phaser.Scene {
         this.obstacle4 = this.matter.add.sprite(600, 355, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
         this.obstacle4extend = this.matter.add.sprite(350, 355, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
@@ -109,11 +109,7 @@ class Level7 extends Phaser.Scene {
         this.arrow.body.position.x = this.player.body.position.x + 82;
         this.arrow.body.position.y = this.player.body.position.y - 12;
         // set gravity of ball based on side of screen
-        if (this.player.body.position.y < 430) {
-            this.matter.world.setGravity(0, -this.gravity);
-        } else if (this.player.body.position.y > 430){
-            this.matter.world.setGravity(0, this.gravity);
-        }
+        //this.matter.world.setGravity(0, this.gravity);
 
     }
 

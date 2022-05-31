@@ -69,7 +69,7 @@ class Level20 extends Phaser.Scene {
         this.sticky4.alpha = 0;
 
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;

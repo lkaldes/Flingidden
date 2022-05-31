@@ -39,7 +39,7 @@ class Level4 extends Phaser.Scene {
         this.obstacle3 = this.matter.add.sprite(45, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(90);
         this.obstacle4 = this.matter.add.sprite(675, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(270);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;

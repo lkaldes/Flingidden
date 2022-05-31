@@ -32,7 +32,7 @@ class Level14 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'garden').setOrigin(0, 0);
 
         this.obstacle1 = this.matter.add.sprite(600, 660, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(120, 240, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
@@ -41,10 +41,10 @@ class Level14 extends Phaser.Scene {
 
         this.stickywindmill1 = this.matter.add.sprite(360, 450, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
         this.windmill2 = this.matter.add.sprite(180, 120, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(3);
-        this.windmill3 = this.matter.add.sprite(540, 780, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(3);
+        this.windmill3 = this.matter.add.sprite(550, 780, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(3);
 
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
@@ -59,8 +59,8 @@ class Level14 extends Phaser.Scene {
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(75, 70, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(645, 835, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(80, 70, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(640, 835, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
                // ball/arrow properties
                this.slopey = 0.0;

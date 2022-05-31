@@ -32,7 +32,7 @@ class Level15 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'garden').setOrigin(0, 0);
 
         this.obstacle8 = this.matter.add.sprite(675, 85, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2).setAngle(180);
         this.obstacle9 = this.matter.add.sprite(45, 815, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2);
@@ -49,7 +49,7 @@ class Level15 extends Phaser.Scene {
         this.windmill6 = this.matter.add.sprite(660, 705, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(2.5);
         this.windmill7 = this.matter.add.sprite(530, 800, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(2.5);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;

@@ -47,7 +47,7 @@ class Level8 extends Phaser.Scene {
         this.obstacle10 = this.matter.add.sprite(675, 740, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2).setAngle(180);
         this.obstacle11 = this.matter.add.sprite(45, 740, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2).setAngle(90);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;

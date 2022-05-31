@@ -45,7 +45,7 @@ class Level3 extends Phaser.Scene {
         this.sticky2.flipY = true;
         this.sticky3 = this.matter.add.sprite(37, 470, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setAngle(270);
 
-        this.scoreboard = this.matter.add.sprite(350, -80, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;

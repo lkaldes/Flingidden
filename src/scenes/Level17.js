@@ -84,14 +84,22 @@ class Level17 extends Phaser.Scene {
         }.bind(this));
         
         // mouse functions
+        this.pointer = this.input.activePointer;
         this.input.on('pointerup', this.fling.bind(this));
-        this.input.on('pointermove', this.point, this);
     }
 
     update(){
         // show/hide arrow whether ball is moving or not
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.arrow.alpha = 100;
+            if (this.playerturn % 2 == 0) {
+                this.graphics.lineStyle(10, 0xd50000);
+            } else {
+                this.graphics.lineStyle(10, 0x2195f3);
+            }
+            this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+            this.arrow.setAngle(angle);
         } else {
             this.graphics.clear();
             this.arrow.alpha = 0;
@@ -122,28 +130,13 @@ class Level17 extends Phaser.Scene {
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < 1 && Math.abs(this.player.body.velocity.y) < 0.1) {
             this.graphics.clear();
             this.sticky = false;
             this.slopey = 5 * (pointer.y - this.player.body.position.y);
             this.slopex = 5 * (pointer.x - this.player.body.position.x);
             this.player.setVelocity(this.slopex / 75, this.slopey / 75);
             this.playerturn++;
-        }
-    }
-
-    // arrow pointing when mouse moves
-    point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
-            this.graphics.clear();
-            if (this.playerturn % 2 == 0) {
-                this.graphics.lineStyle(10, 0xd50000);
-            } else {
-                this.graphics.lineStyle(10, 0x2195f3);
-            }
-            this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
-            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
-            this.arrow.setAngle(angle);
         }
     }
 

@@ -83,14 +83,23 @@ class Level4 extends Phaser.Scene {
         }.bind(this));
 
         // mouse functions
+        this.pointer = this.input.activePointer;
         this.input.on('pointerup', this.fling.bind(this));
-        this.input.on('pointermove', this.point, this);
     }
 
     update(){
         // show/hide arrow whether ball is moving or not
         if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.arrow.alpha = 100;
+            this.graphics.clear();
+            if (this.playerturn % 2 == 0) {
+                this.graphics.lineStyle(10, 0xd50000);
+            } else {
+                this.graphics.lineStyle(10, 0x2195f3);
+            }
+            this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+            this.arrow.setAngle(angle);
         } else {
             this.graphics.clear();
             this.arrow.alpha = 0;
@@ -124,23 +133,6 @@ class Level4 extends Phaser.Scene {
             this.playerturn++;
         }
     }
-
-    // arrow pointing when mouse moves
-    point(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
-            this.graphics.clear();
-            if (this.playerturn % 2 == 0) {
-                this.graphics.lineStyle(10, 0xd50000);
-            } else {
-                this.graphics.lineStyle(10, 0x2195f3);
-            }
-            this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
-            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, pointer.x, pointer.y);
-            this.arrow.setAngle(angle);
-        }
-    }
-
-    
 
     nextlevel(){
         this.scene.start("level5Scene");

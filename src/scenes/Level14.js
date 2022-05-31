@@ -104,6 +104,7 @@ class Level14 extends Phaser.Scene {
         // show/hide arrow whether ball is moving or not
         if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.arrow.alpha = 100;
+            this.graphics.clear();
             if (this.playerturn % 2 == 0) {
                 this.graphics.lineStyle(10, 0xd50000);
             } else {

@@ -55,6 +55,13 @@ class Level0 extends Phaser.Scene {
         this.goal1 = this.matter.add.sprite(60, 95, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         this.goal2 = this.matter.add.sprite(660, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
+        // UI properties
+        this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5);
+        this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+
         // ball/arrow properties
         this.slopey = 0.0;
         this.slopex = 0.0;

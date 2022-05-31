@@ -133,7 +133,7 @@ class Level13 extends Phaser.Scene {
                
                this.stickywindmill1.angle += 1;
                this.stickywindmill2.angle += 1;
-               this.windmill3.angle += 1;
+               this.stickywindmill3.angle += 1;
            }
        
            // launch mechanics chen clicked

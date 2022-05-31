@@ -34,9 +34,22 @@ class Level17 extends Phaser.Scene {
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         
-        //this.obstacle1 = this.matter.add.sprite(360, 440, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+        this.obstacle1 = this.matter.add.sprite(360, 120, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+        this.obstacle2 = this.matter.add.sprite(360, 440, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+        this.obstacle3 = this.matter.add.sprite(360, 760, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
 
-        
+        this.obstacle4 = this.matter.add.sprite(160, 340, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+        this.obstacle5 = this.matter.add.sprite(160, 540, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2);
+
+        this.obstacle6 = this.matter.add.sprite(660, 240, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle7 = this.matter.add.sprite(660, 640, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+
+        this.obstacle8 = this.matter.add.sprite(30, 830, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(1.5);
+        this.obstacle9 = this.matter.add.sprite(30, 75, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(1.5).setAngle(90);
+        this.obstacle10 = this.matter.add.sprite(285, 830, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(1.5).setAngle(270);
+        this.obstacle11 = this.matter.add.sprite(285, 75, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(1.5).setAngle(180);
+
+        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
@@ -53,7 +66,7 @@ class Level17 extends Phaser.Scene {
         // create goals
         this.goal1 = this.matter.add.sprite(660, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         this.goal2 = this.matter.add.sprite(660, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-       
+        
         // UI properties
         this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
         this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5);
@@ -61,7 +74,7 @@ class Level17 extends Phaser.Scene {
         this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        
+       
         // ball/arrow properties
         this.slopey = 0.0;
         this.slopex = 0.0;
@@ -139,7 +152,7 @@ class Level17 extends Phaser.Scene {
 
     // launch mechanics chen clicked
     fling(pointer, player) {
-        if (Math.abs(this.player.body.velocity.x) < 1 && Math.abs(this.player.body.velocity.y) < 0.1 && pointer.y > 40) {
+        if (Math.abs(this.player.body.velocity.x) < 1 && Math.abs(this.player.body.velocity.y) < 0.1  && pointer.y > 40) {
             this.graphics.clear();
             this.sticky = false;
             this.slopey = 5 * (pointer.y - this.player.body.position.y);

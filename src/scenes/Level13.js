@@ -99,7 +99,6 @@ class Level13 extends Phaser.Scene {
                // mouse functions
                this.pointer = this.input.activePointer;
                this.input.on('pointerup', this.fling.bind(this));
-               this.input.on('pointermove', this.point, this);
            }
        
            update(){

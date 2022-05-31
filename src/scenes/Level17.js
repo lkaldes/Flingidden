@@ -85,7 +85,7 @@ class Level17 extends Phaser.Scene {
         
         // mouse functions
         this.input.on('pointerup', this.fling.bind(this));
-        this.input.on('pointermove', this.point, this);
+        this.pointer = this.input.activePointer;
     }
 
     update(){

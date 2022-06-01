@@ -29,13 +29,11 @@ class Menu extends Phaser.Scene {
     create(){
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         this.lvl = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.tut = this.physics.add.sprite(353, 440, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.htp = this.physics.add.sprite(353, 540, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.idk = this.physics.add.sprite(353, 640, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.tut = this.physics.add.sprite(353, 450, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.htp = this.physics.add.sprite(353, 560, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
         this.add.text(360, 340, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 440, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 540, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 640, 'IDK', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 450, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 560, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
         this.input.on('gameobjectover', function (pointer, gameObject) {
             gameObject.setTexture('selected');
@@ -50,8 +48,6 @@ class Menu extends Phaser.Scene {
                 this.scene.start("level0Scene");
             } else if (this.htp.texture.key == 'selected') {
                 //this.scene.start("howtoplay");
-            } else if (this.idk.texture.key == 'selected') {
-                //this.scene.start("idk");
             }
         }.bind(this));
     }

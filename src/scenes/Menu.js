@@ -22,23 +22,42 @@ class Menu extends Phaser.Scene {
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
         this.load.audio('bounce', './assets/BallBounceSound.wav');
+        this.load.image('unselected', './assets/obstacle.png');
+        this.load.image('selected', './assets/woodrectangle.png');
     }
 
     create(){
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.add.text(360, 230, 'Push (W) to Play', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 400, 'Rules:', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 430, 'Click on (mouse) the screen in direction you want to fling the ball', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 460, 'The farther you click away from the ball the more power you will fling it', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 530, 'This is a two player game where the players take turns', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 560, 'flinging the ball into the others goal', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.lvl = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.tut = this.physics.add.sprite(353, 440, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.htp = this.physics.add.sprite(353, 540, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.idk = this.physics.add.sprite(353, 640, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.add.text(360, 340, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 440, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 540, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 640, 'IDK', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+
+        this.input.on('gameobjectover', function (pointer, gameObject) {
+            gameObject.setTexture('selected');
+        });
+        this.input.on('gameobjectout', function (pointer, gameObject) {
+            gameObject.setTexture('unselected');
+        });
+        this.input.on('pointerup', function (pointer) {
+            if (this.lvl.texture.key == 'selected') {
+                this.scene.start("level1Scene");
+            } else if (this.tut.texture.key == 'selected') {
+                this.scene.start("level0Scene");
+            } else if (this.htp.texture.key == 'selected') {
+                //this.scene.start("howtoplay");
+            } else if (this.idk.texture.key == 'selected') {
+                //this.scene.start("idk");
+            }
+        }.bind(this));
     }
 
     update(){
-        if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            this.scene.start('level0Scene');    
-        }
+        
     }
 
 }

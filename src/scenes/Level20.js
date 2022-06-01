@@ -111,12 +111,12 @@ class Level20 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(130, 40);
+                this.player.setPosition(360, 60);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(590, 870);
+                this.player.setPosition(360, 840);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {

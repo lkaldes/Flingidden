@@ -32,7 +32,7 @@ class Level10 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'intersection').setOrigin(0, 0);
         
         this.obstacle1 = this.matter.add.sprite(550, 580, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5);
         this.obstacle2 = this.matter.add.sprite(450, 250, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(1.5).setAngle(270);

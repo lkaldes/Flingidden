@@ -1,7 +1,7 @@
-class Level20 extends Phaser.Scene {
+class Level18 extends Phaser.Scene {
     constructor() {
         super({
-            key: "level20Scene",     
+            key: "level18Scene",     
             physics: {
                 //default: 'arcade',
                 arcade: {
@@ -32,7 +32,7 @@ class Level20 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'space').setOrigin(0, 0);
 
         this.obstacle1 = this.matter.add.sprite(660, 180, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(60, 180, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
@@ -191,6 +191,6 @@ class Level20 extends Phaser.Scene {
     }
 
     nextlevel(){
-        this.scene.start("level0Scene");
+        this.scene.start("menuScene");
     }
 }

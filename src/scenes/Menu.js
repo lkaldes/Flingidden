@@ -5,15 +5,18 @@ class Menu extends Phaser.Scene {
     
     preload(){
         this.load.image('circle', './assets/circle.png');
-        this.load.image('title', './assets/background.png');
+        this.load.image('title', './assets/TitleScreen.png');
+        this.load.image('tutorial', './assets/TutorialBackground.png');
         this.load.image('kitchen', './assets/KB.png');
         this.load.image('garden', './assets/gardenbackground.png');
-        this.load.image('obstacle', './assets/woodRectangle.png');
+        this.load.image('space', './assets/SpaceBackground.png');
+        this.load.image('intersection', './assets/Intersection.png');
+        this.load.image('obstacle', './assets/slimerectangle.png');
         this.load.image('header', './assets/obstacle.png');
-        this.load.image('circleobstacle', './assets/woodcircle.png');
-        this.load.image('square', './assets/square.png');
-        this.load.image('triangle', './assets/woodtriangle.png');
-        this.load.image('eqtriangle', './assets/equaltriangle.png');
+        this.load.image('circleobstacle', './assets/slimecircle.png');
+        this.load.image('square', './assets/slimesquare.png');
+        this.load.image('triangle', './assets/slimetriangle.png');
+        this.load.image('eqtriangle', './assets/slimeequaltriangle.png');
         this.load.image('windmill', './assets/windmill.png');
         this.load.image('stickywindmill', './assets/stickywindmill.png');
         this.load.image('sticky', './assets/stickyslime.png')
@@ -23,7 +26,8 @@ class Menu extends Phaser.Scene {
         this.load.image('arrowp1', './assets/redArrow.png');
         this.load.audio('bounce', './assets/BallBounceSound.wav');
         this.load.image('unselected', './assets/obstacle.png');
-        this.load.image('selected', './assets/woodrectangle.png');
+        this.load.image('selected', './assets/slimerectangle.png');
+        this.load.image('selected2', './assets/obstacle.png');
     }
 
     create(){
@@ -43,7 +47,7 @@ class Menu extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl.texture.key == 'selected') {
-                this.scene.start("level1Scene");
+                this.scene.start("level18Scene");
             } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
             } else if (this.htp.texture.key == 'selected') {

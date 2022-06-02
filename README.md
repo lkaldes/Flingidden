@@ -6,7 +6,7 @@
 
 ## Controls
 
-- (Mouse Click): To Launch Slime in direction of mouse pointer and push menu buttons
+- (Mouse Click and Point): To Launch Slime in direction of mouse pointer and push menu buttons
 
 ## Credits
 

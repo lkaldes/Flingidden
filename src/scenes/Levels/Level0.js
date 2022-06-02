@@ -73,8 +73,12 @@ class Level0 extends Phaser.Scene {
         this.restartButton = this.physics.add.sprite(220, 450, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3).setAlpha(0);
 
         // pause game
-        this.gameisPaused = false;
+        this.gameisPaused = true;
         this.createPauseScreen();
+
+        // tutorial screen
+        this.TutorialScreen();
+        //this.TutorialScreenRemove(true);
 
         this.input.on('gameobjectover', function (pointer, gameObject) {
             gameObject.setTexture('selected');
@@ -211,6 +215,11 @@ class Level0 extends Phaser.Scene {
             this.sound.play('Select');
             this.menuSelect.setDepth(0);
             this.gameisPaused = true;
+        } else if (this.continueSelectTutorial.texture.key == 'selected') {
+            this.TutorialScreenRemove(false);
+            this.unpauseGame(false);
+            this.sound.play('Select');
+            this.menuSelect.setDepth(3);
         } else if (this.continueSelect.texture.key == 'selected') {
             this.unpauseGame(false);
             this.sound.play('Select');
@@ -239,6 +248,25 @@ class Level0 extends Phaser.Scene {
             this.player.setVelocity(this.slopex / 75, this.slopey / 75);
             this.playerturn++;
         }
+    }
+
+    TutorialScreen(){
+        this.veil = this.add.graphics({ x: 0, y: 0 });
+        this.veil.fillStyle('0x000000', 0.3);
+        this.veil.fillRect(0, 0, game.config.width, game.config.height);
+        this.veil.setDepth(2);
+        this.veil.setScrollFactor(0);
+
+        this.gravitymsg = this.add.text(360, 360, 'This line here will show the split\nof gravity for each level.\nThis is just a general guide and may not be\naccurate for all levels', { font: '24px Impact', fill: '#1b2cc2', align: 'center'}).setOrigin(0.5).setDepth(11).setScrollFactor(0);
+        this.continueSelectTutorial = this.physics.add.sprite(353, 500, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+        this.continueTutorial = this.add.text(360, 500, 'Continue', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+    }
+
+    TutorialScreenRemove(is_visible){
+        this.veil.setVisible(is_visible);
+        this.continueTutorial.setVisible(is_visible);
+        this.continueSelectTutorial.setVisible(is_visible);
+        this.gravitymsg.setVisible(is_visible);
     }
 
     createPauseScreen(){

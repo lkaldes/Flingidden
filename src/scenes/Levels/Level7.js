@@ -23,11 +23,6 @@ class Level7 extends Phaser.Scene {
         });
     }
 
-    preload(){
-        this.load.json('shapes', 'assets/Shapes.json');
-        this.load.audio('Music2','./assets/It Takes Two to Tango(4).mp3');
-    }
-
     create(){
 
         
@@ -60,10 +55,10 @@ class Level7 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(670, 40, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(670, 40, '', null, { shape: this.shapes.circle }).setAngle(180);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(50, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(50, 870, '', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
@@ -100,9 +95,37 @@ class Level7 extends Phaser.Scene {
         // ball/arrow properties
         this.slopey = 0.0;
         this.slopex = 0.0;
-        this.player.depth = 100;
+        this.player.setDepth(1);
         this.arrow.depth = 1;
         this.graphics = this.add.graphics();
+        this.player.setScale(1.5);
+
+        // animation create
+        this.anims.create({
+            key: 'Idle',
+            frames: this.anims.generateFrameNames('slime_atlas', {
+                prefix: 'Idle_',
+                start: 1,
+                end: 2,
+                suffix: '',
+                zeroPad: 0
+            }),
+            frameRate: 1,
+            repeat: -1,
+        });
+
+        this.anims.create({
+            key: 'Fling',
+            frames: this.anims.generateFrameNames('slime_atlas', {
+                prefix: 'Fling_',
+                start: 1,
+                end: 2,
+                suffix: '',
+                zeroPad: 0
+            }),
+            frameRate: 5,
+            repeat: -1,
+        });
 
         // movement properties (change for balance)
         this.player.setBounce(0.8);
@@ -122,6 +145,7 @@ class Level7 extends Phaser.Scene {
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else {
+                this.player.setTexture('slime_atlas', 'Bounce');
                 this.sound.play('bounce');
             }
         }.bind(this));
@@ -135,6 +159,7 @@ class Level7 extends Phaser.Scene {
         // show/hide arrow whether ball is moving or not
         if (!this.gameisPaused){
             if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
+                this.player.anims.play('Idle', true);
                 this.arrow.alpha = 100;
                 this.graphics.clear();
                 if (this.playerturn % 2 == 0) {
@@ -146,6 +171,11 @@ class Level7 extends Phaser.Scene {
                 var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
                 this.arrow.setAngle(angle);
             } else {
+                if (Math.abs(this.player.body.velocity.x) < 5 && Math.abs(this.player.body.velocity.y) < 5) {
+                    this.player.setTexture('slime_atlas', 'Bounce');
+                } else {
+                    this.player.anims.play('Fling', true);
+                }
                 this.graphics.clear();
                 this.arrow.alpha = 0;
             }
@@ -284,11 +314,15 @@ class Level7 extends Phaser.Scene {
         this.levelselectButton.setAlpha(1);
         this.add.text(510, 450, 'Level Select', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
         this.add.sprite(350, 220, 'selected').setScale(2,3.7).setAngle(90).setDepth(3);
+        this.winplayer = this.add.sprite(180, 345, '').setScale(1.7).setDepth(3);
         if (player == 1) {
             this.add.text(360, 220, 'PLAYER 1 WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
         } else {
+            this.winplayer.setPosition(540, 345);
+            this.winplayer.flipX = true;
             this.add.text(360, 220, 'PLAYER 2 WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
         }
+        this.winplayer.anims.play('Idle');
         this.add.sprite(353, 340, 'selected').setScale(1.5).setAngle(90).setDepth(3);
         this.add.text(300, 340, this.player1score, { font: '60px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
         this.add.text(420, 340, this.player2score, { font: '60px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);

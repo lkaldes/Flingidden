@@ -4,43 +4,44 @@ class Menu extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('circle', './assets/slime.png');
-        this.load.image('title', './assets/TitleScreen.png');
-        this.load.image('levelselect', './assets/LevelScreen.png');
-        this.load.image('tutorial', './assets/TutorialBackground.png');
-        this.load.image('kitchen', './assets/KB.png');
-        this.load.image('garden', './assets/gardenbackground.png');
-        this.load.image('space', './assets/SpaceBackground.png');
-        this.load.image('intersection', './assets/Intersection.png');
-        this.load.image('obstacle', './assets/slimerectangle.png');
-        this.load.image('header', './assets/obstacle.png');
-        this.load.image('circleobstacle', './assets/slimecircle.png');
-        this.load.image('square', './assets/slimesquare.png');
-        this.load.image('triangle', './assets/slimetriangle.png');
-        this.load.image('eqtriangle', './assets/slimeequaltriangle.png');
-        this.load.image('windmill', './assets/windmill.png');
-        this.load.image('stickywindmill', './assets/stickywindmill.png');
-        this.load.image('sticky', './assets/stickyslime.png')
-        this.load.image('goal1', './assets/bluegoal.png');
-        this.load.image('goal2', './assets/redgoal.png');
-        this.load.image('arrowp2', './assets/blueArrow.png');
-        this.load.image('arrowp1', './assets/redArrow.png');
-        this.load.audio('bounce', './assets/SlimeCollide.wav');
-        this.load.image('unselected', './assets/obstacle.png');
-        this.load.image('selected', './assets/slimerectangle.png');
-        this.load.image('popup', './assets/obstacle.png');
-
-        this.load.audio('Select', './assets/LevelSelect.wav');
-        this.load.audio('Complete', './assets/LevelComplete.wav');
-        this.load.audio('Launch', './assets/SlimeLaunch.wav');
-        this.load.audio('Start', './assets/LevelStart.wav');
-
-
-        //added music
-        this.load.audio('LevelMusic','./assets/Chill.mp3');
+        this.load.path = 'assets/';
+        this.load.image('title', 'backgrounds/TitleScreen.png');
+        this.load.image('levelselect', 'backgrounds/LevelScreen.png');
+        this.load.image('tutorial', 'backgrounds/TutorialBackground.png');
+        this.load.image('kitchen', 'backgrounds/KB.png');
+        this.load.image('garden', 'backgrounds/gardenbackground.png');
+        this.load.image('space', 'backgrounds/SpaceBackground.png');
+        this.load.image('intersection', 'backgrounds/Intersection.png');
+        this.load.image('obstacle', 'obstacles/slimerectangle.png');
+        this.load.image('circleobstacle', 'obstacles/slimecircle.png');
+        this.load.image('square', 'obstacles/slimesquare.png');
+        this.load.image('triangle', 'obstacles/slimetriangle.png');
+        this.load.image('eqtriangle', 'obstacles/slimeequaltriangle.png');
+        this.load.image('windmill', 'obstacles/windmill.png');
+        this.load.image('stickywindmill', 'obstacles/stickywindmill.png');
+        this.load.image('sticky', 'obstacles/stickyslime.png');
+        this.load.image('unselected', 'obstacles/obstacle.png');
+        this.load.image('selected', 'obstacles/slimerectangle.png');
+        this.load.image('popup', 'obstacles/obstacle.png');
+        this.load.image('header', 'obstacles/obstacle.png');
+        this.load.image('goal1', 'bluegoal.png');
+        this.load.image('goal2', 'redgoal.png');
+        this.load.image('arrowp2', 'slime/blueArrow.png');
+        this.load.image('arrowp1', 'slime/redArrow.png');
+        this.load.audio('Select', 'sounds/LevelSelect.wav');
+        this.load.audio('Complete', 'sounds/LevelComplete.wav');
+        this.load.audio('Launch', 'sounds/SlimeLaunch.wav');
+        this.load.audio('Start', 'sounds/LevelStart.wav');
+        this.load.audio('bounce', 'sounds/SlimeCollide.wav');
+        this.load.audio('Music1','sounds/Music1.mp3');
+        this.load.audio('Music2','sounds/Music2.mp3');
+        this.load.audio('Music3','sounds/Music3.mp3');
+        this.load.audio('Music4','sounds/Music4.mp3');
+        this.load.audio('Music5','sounds/Music5.mp3');
+        this.load.json('shapes', 'obstacles/Shapes.json');
 
         //load slime animation
-        //this.load.atlas('slime_atlas', 'slimeanimation.png', 'linkmap.json');
+        this.load.atlas('slime_atlas', 'slime/slimeanimation.png', 'slime/slimemap.json');
     }
 
     create(){
@@ -55,8 +56,8 @@ class Menu extends Phaser.Scene {
 
         this.game.sound.stopAll();
         //play music
-        //this.sound.play('LevelMusic');
-        this.loopingAudio = this.sound.add("LevelMusic");
+        //this.sound.play('Music1');
+        this.loopingAudio = this.sound.add("Music1");
         this.loopingAudio.play({
             loop: true
         });

@@ -1,0 +1,114 @@
+{
+    "frames": {
+        "Idle_1": {
+            "frame": {
+                "x": 13,
+                "y": 13,
+                "w": 35,
+                "h": 29
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 35,
+                "h": 29
+            },
+            "sourceSize": {
+                "w": 35,
+                "h": 29
+            }
+        },
+        "Idle_2": {
+            "frame": {
+                "x": 73,
+                "y": 17,
+                "w": 35,
+                "h": 25
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 35,
+                "h": 25
+            },
+            "sourceSize": {
+                "w": 35,
+                "h": 25
+            }
+        },
+        "Fling_1": {
+            "frame": {
+                "x": 120,
+                "y": 17,
+                "w": 59,
+                "h": 25
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 59,
+                "h": 25
+            },
+            "sourceSize": {
+                "w": 59,
+                "h": 25
+            }
+        },
+        "Fling_2": {
+            "frame": {
+                "x": 182,
+                "y": 17,
+                "w": 57,
+                "h": 24
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 57,
+                "h": 24
+            },
+            "sourceSize": {
+                "w": 57,
+                "h": 24
+            }
+        },
+        "Bounce": {
+            "frame": {
+                "x": 13,
+                "y": 72,
+                "w": 38,
+                "h": 31
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 38,
+                "h": 31
+            },
+            "sourceSize": {
+                "w": 38,
+                "h": 31
+            }
+        }
+    },
+    "meta": {
+        "app": "https://www.leshylabs.com/apps/sstool/",
+        "version": "Leshy SpriteSheet Tool v0.8.4",
+        "image": "spritesheet.png",
+        "size": {
+            "w": 240,
+            "h": 120
+        },
+        "scale": 1
+    }
+}

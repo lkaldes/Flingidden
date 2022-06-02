@@ -1,9 +1,11 @@
 /*
 Group: Noah Hart, Leon Chen, Liam Kaldes
-Game Title: Ghost Hunter
-Date Completed: 5/2/22
+Game Title: Flingidden
+Date Completed: 6/2/22
 Small edits made prior to submit date
-Creative tilt - spooky theme where you can shoot ghost!
+Creative tilt - point and click game trying to fling the slime to your own goal
+                while gravity changes in different areas.
+                Also utilizes the bouncing physics
 */
 
 let config = {

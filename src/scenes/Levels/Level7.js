@@ -35,13 +35,13 @@ class Level7 extends Phaser.Scene {
         this.add.tileSprite(0, 0, 720, 860, 'intersection').setOrigin(0, 0);
         
         this.obstacle1 = this.matter.add.sprite(100, 175, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle1extend = this.matter.add.sprite(350, 175, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1extend = this.matter.add.sprite(520, 175, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
         this.obstacle2 = this.matter.add.sprite(600, 725, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle2extend = this.matter.add.sprite(350, 725, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle2extend = this.matter.add.sprite(200, 725, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
         this.obstacle3 = this.matter.add.sprite(100, 545, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle3extend = this.matter.add.sprite(350, 545, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle3extend = this.matter.add.sprite(520, 545, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
         this.obstacle4 = this.matter.add.sprite(600, 355, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
-        this.obstacle4extend = this.matter.add.sprite(350, 355, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle4extend = this.matter.add.sprite(200, 355, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
 
         
         this.playerturn = 0;
@@ -123,7 +123,7 @@ class Level7 extends Phaser.Scene {
     update(){
         // show/hide arrow whether ball is moving or not
         if (!this.gameisPaused){
-            if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
+            if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 0.1) {
                 this.arrow.alpha = 100;
                 this.graphics.clear();
                 if (this.playerturn % 2 == 0) {
@@ -151,11 +151,6 @@ class Level7 extends Phaser.Scene {
         // set gravity of ball based on side of screen
         if (!this.sticky) {
             this.player.setFriction(1);
-            if (this.player.body.position.y < 430) {
-                this.matter.world.setGravity(0, -this.gravity);
-            } else if (this.player.body.position.y > 430){
-                this.matter.world.setGravity(0, this.gravity);
-            }
         } else {
             this.matter.world.setGravity(0, 0);
             this.player.setVelocity(0);
@@ -188,7 +183,7 @@ class Level7 extends Phaser.Scene {
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
-            this.scene.start("levelselect1Scene");
+            this.scene.start("levelselect2Scene");
         } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
             this.graphics.clear();
             this.slopey = 5 * (pointer.y - this.player.body.position.y);

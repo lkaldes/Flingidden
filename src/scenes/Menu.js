@@ -52,7 +52,7 @@ class Menu extends Phaser.Scene {
             } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
             } else if (this.htp.texture.key == 'selected') {
-                this.scene.start("level5Scene");
+                this.scene.start("level7Scene");
                 //this.scene.start("howtoplay");
             }
         }.bind(this));

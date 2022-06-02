@@ -6,6 +6,7 @@ class Menu extends Phaser.Scene {
     preload(){
         this.load.image('circle', './assets/circle.png');
         this.load.image('title', './assets/TitleScreen.png');
+        this.load.image('levelselect', './assets/LevelScreen.png');
         this.load.image('tutorial', './assets/TutorialBackground.png');
         this.load.image('kitchen', './assets/KB.png');
         this.load.image('garden', './assets/gardenbackground.png');
@@ -55,10 +56,6 @@ class Menu extends Phaser.Scene {
                 //this.scene.start("howtoplay");
             }
         }.bind(this));
-    }
-
-    update(){
-        
-    }
+    } 
 
 }

@@ -9,22 +9,19 @@ class LevelSelect1 extends Phaser.Scene {
         this.load.image('lvl3', './assets/LevelScreenshots/Level3.png');
         this.load.image('lvl4', './assets/LevelScreenshots/Level4.png');
         this.load.image('lvl5', './assets/LevelScreenshots/Level5.png');
-
-        //added music
-        //this.load.audio('Music1','./assets/Sneaky(Jason Shaw)(2).mp3');
-
     }
 
     create(){
 
+        //audio
+        this.loopingAudio = this.sound.add("TitleMusic");
+        if(isPlaying == false){
+            this.loopingAudio.play({
+                loop: true
+            });
+            isPlaying = true;
+        }
 
-        // this.game.sound.stopAll();
-        // //play music
-        // //this.sound.play('LevelMusic');
-        // this.loopingAudio = this.sound.add("Music1");
-        // this.loopingAudio.play({
-        //     loop: true
-        // });
 
         this.add.tileSprite(0, 0, 720, 860, 'levelselect').setOrigin(0, 0);
 

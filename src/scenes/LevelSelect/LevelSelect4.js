@@ -12,6 +12,16 @@ class LevelSelect4 extends Phaser.Scene {
     }
 
     create(){
+
+        //audio
+        this.loopingAudio = this.sound.add("TitleMusic");
+        if(isPlaying == false){
+            this.loopingAudio.play({
+                loop: true
+            });
+            isPlaying = true;
+        }
+
         this.add.tileSprite(0, 0, 720, 860, 'levelselect').setOrigin(0, 0);
 
         this.lvl16 = this.add.image(180, 240, 'lvl1').setScale(0.125).setDepth(1).setInteractive();

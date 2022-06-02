@@ -15,10 +15,10 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            //debug: true
+            debug: true
         },
         matter: {
-            //debug: true
+            debug: true
         }
     },
     scene: [ Menu, LevelSelect1, LevelSelect2, LevelSelect3, LevelSelect4, Level0, Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, 
@@ -27,5 +27,8 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-// jump, restart, fire keys
-let click, keyW;
+// mouse input
+let click;
+
+//global music playing checker
+let isPlaying = false;

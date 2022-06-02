@@ -33,11 +33,11 @@ class Menu extends Phaser.Scene {
         this.load.audio('Launch', 'sounds/SlimeLaunch.wav');
         this.load.audio('Start', 'sounds/LevelStart.wav');
         this.load.audio('bounce', 'sounds/SlimeCollide.wav');
-        this.load.audio('Music1','sounds/Music1.mp3');
-        this.load.audio('Music2','sounds/Music2.mp3');
-        this.load.audio('Music3','sounds/Music3.mp3');
-        this.load.audio('Music4','sounds/Music4.mp3');
-        this.load.audio('Music5','sounds/Music5.mp3');
+        this.load.audio('TitleMusic','sounds/TitleMusic.mp3');
+        this.load.audio('SpaceMusic','sounds/SpaceMusic.mp3');
+        this.load.audio('KitchenMusic','sounds/KitchenMusic.mp3');
+        this.load.audio('GardenMusic','sounds/GardenMusic.mp3');
+        this.load.audio('IntersectionMusic','sounds/IntersectionMusic.mp3');
         this.load.json('shapes', 'obstacles/Shapes.json');
 
         //load slime animation
@@ -54,13 +54,15 @@ class Menu extends Phaser.Scene {
         this.add.text(360, 560, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
 
-        this.game.sound.stopAll();
         //play music
-        //this.sound.play('Music1');
-        this.loopingAudio = this.sound.add("Music1");
-        this.loopingAudio.play({
-            loop: true
-        });
+        //this.game.sound.stopAll();
+        this.loopingAudio = this.sound.add("TitleMusic");
+        if(isPlaying == false){
+            this.loopingAudio.play({
+                loop: true
+            });
+            isPlaying = true;
+        }
 
 
         this.input.on('gameobjectover', function (pointer, gameObject) {
@@ -77,7 +79,7 @@ class Menu extends Phaser.Scene {
                 this.scene.start("level0Scene");
                 this.sound.play('Select');
             } else if (this.htp.texture.key == 'selected') {
-                this.scene.start("level7Scene");
+                this.scene.start("level1Scene");
                 this.sound.play('Select');
                 //this.scene.start("howtoplay");
             }

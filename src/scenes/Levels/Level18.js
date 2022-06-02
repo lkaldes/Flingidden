@@ -29,13 +29,11 @@ class Level18 extends Phaser.Scene {
         this.game.sound.stopAll();
         this.sound.play('Start');
         //play music
-        //this.sound.play('LevelMusic');
-        this.loopingAudio = this.sound.add("Music4");
+        this.loopingAudio = this.sound.add("SpaceMusic");
         this.loopingAudio.play({
             loop: true
         });
 
-        //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'space').setOrigin(0, 0);
@@ -79,6 +77,7 @@ class Level18 extends Phaser.Scene {
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
+
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
             this.player = this.matter.add.sprite(360, 60, '', null, { shape: this.shapes.circle }).setAngle(180);
@@ -99,7 +98,7 @@ class Level18 extends Phaser.Scene {
         this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
         this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.menuSelect = this.physics.add.sprite(670, 9, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(50,40).setDepth(2);
+        this.menuSelect = this.physics.add.sprite(670, 20, 'unselected').setInteractive().setAngle(90).setScale(0.5, 1).setSize(50,40).setDepth(2);
         this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
 
         this.nextButton = this.physics.add.sprite(520, 520, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3).setAlpha(0);
@@ -255,8 +254,12 @@ class Level18 extends Phaser.Scene {
         } else if (this.nextButton.texture.key == 'selected') {
             this.scene.start("level19Scene");
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
+            this.game.sound.stopAll();
+            isPlaying = false;
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
+            this.game.sound.stopAll();
+            isPlaying = false;
             this.scene.start("levelselect4Scene");
         } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
             this.graphics.clear();
@@ -330,7 +333,6 @@ class Level18 extends Phaser.Scene {
 
     victory(player){
         this.veil.setVisible(true);
-        //this.sound.play('levelcomplete');
         this.game.sound.stopAll();
         this.sound.play('Complete');
         this.graphics.clear();

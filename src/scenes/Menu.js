@@ -28,16 +28,16 @@ class Menu extends Phaser.Scene {
         this.load.audio('bounce', './assets/BallBounceSound.wav');
         this.load.image('unselected', './assets/obstacle.png');
         this.load.image('selected', './assets/slimerectangle.png');
-        this.load.image('selected2', './assets/obstacle.png');
+        this.load.image('popup', './assets/obstacle.png');
     }
 
     create(){
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.lvl = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.tut = this.physics.add.sprite(353, 450, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.lvl = this.physics.add.sprite(353, 450, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.tut = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
         this.htp = this.physics.add.sprite(353, 560, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.add.text(360, 340, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 450, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 450, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 340, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 560, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
         this.input.on('gameobjectover', function (pointer, gameObject) {
@@ -48,7 +48,7 @@ class Menu extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl.texture.key == 'selected') {
-                this.scene.start("levelselectScene");
+                this.scene.start("levelselect1Scene");
             } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
             } else if (this.htp.texture.key == 'selected') {

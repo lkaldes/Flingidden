@@ -28,7 +28,7 @@ class Level6 extends Phaser.Scene {
         this.game.sound.stopAll();
         this.sound.play('Start');
         //play music
-        this.loopingAudio = this.sound.add("Music3");
+        this.loopingAudio = this.sound.add("IntersectionMusic").setVolume(0.2);
         this.loopingAudio.play({
             loop: true
         });
@@ -144,12 +144,12 @@ class Level6 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(130, 40);
+                this.player.setPosition(720/2, 10);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(590, 870);
+                this.player.setPosition(720/2, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {
@@ -228,22 +228,28 @@ class Level6 extends Phaser.Scene {
     // launch mechanics when clicked
     fling(pointer, player) {
         if (this.menuSelect.texture.key == 'selected' && this.gameisPaused == false) {
+            this.sound.play('Select');
             this.pauseGame(true);
             this.menuSelect.setDepth(0);
             this.gameisPaused = true;
         } else if (this.continueSelect.texture.key == 'selected') {
+            this.sound.play('Select');
             this.unpauseGame(false);
             this.menuSelect.setDepth(3);
         } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
+            this.sound.play('Select');
             this.scene.restart();
         } else if (this.nextButton.texture.key == 'selected') {
+            this.sound.play('Select');
             this.scene.start("level7Scene");
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
             this.game.sound.stopAll();
+            this.sound.play('Select');
             isPlaying = false;
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
             this.game.sound.stopAll();
+            this.sound.play('Select');
             isPlaying = false;
             this.scene.start("levelselect2Scene");
         } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {

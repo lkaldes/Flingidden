@@ -30,7 +30,7 @@ class Level8 extends Phaser.Scene {
         this.sound.play('Start');
         //play music
         //this.sound.play('LevelMusic');
-        this.loopingAudio = this.sound.add("IntersectionMusic");
+        this.loopingAudio = this.sound.add("IntersectionMusic").setVolume(0.2);
         this.loopingAudio.play({
             loop: true
         });
@@ -224,22 +224,28 @@ class Level8 extends Phaser.Scene {
     // launch mechanics when clicked
     fling(pointer, player) {
         if (this.menuSelect.texture.key == 'selected' && this.gameisPaused == false) {
+            this.sound.play('Select');
             this.pauseGame(true);
             this.menuSelect.setDepth(0);
             this.gameisPaused = true;
         } else if (this.continueSelect.texture.key == 'selected') {
+            this.sound.play('Select');
             this.unpauseGame(false);
             this.menuSelect.setDepth(3);
         } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
+            this.sound.play('Select');
             this.scene.restart();
         } else if (this.nextButton.texture.key == 'selected') {
+            this.sound.play('Select');
             this.scene.start("level9Scene");
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
             this.game.sound.stopAll();
+            this.sound.play('Select');
             isPlaying = false;
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
             this.game.sound.stopAll();
+            this.sound.play('Select');
             isPlaying = false;
             this.scene.start("levelselect2Scene");
         } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {

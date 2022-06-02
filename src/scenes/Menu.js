@@ -6,6 +6,7 @@ class Menu extends Phaser.Scene {
     preload(){
         this.load.path = 'assets/';
         this.load.image('title', 'backgrounds/TitleScreen.png');
+        this.load.image('plain', 'backgrounds/background.png');
         this.load.image('levelselect', 'backgrounds/LevelScreen.png');
         this.load.image('tutorial', 'backgrounds/TutorialBackground.png');
         this.load.image('kitchen', 'backgrounds/KB.png');
@@ -47,16 +48,16 @@ class Menu extends Phaser.Scene {
     create(){
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
         this.lvl = this.physics.add.sprite(353, 450, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.tut = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        //this.tut = this.physics.add.sprite(353, 340, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
         this.htp = this.physics.add.sprite(353, 560, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
         this.add.text(360, 450, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 340, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        //this.add.text(360, 340, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 560, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
 
         //play music
         //this.game.sound.stopAll();
-        this.loopingAudio = this.sound.add("TitleMusic");
+        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.2);
         if(isPlaying == false){
             this.loopingAudio.play({
                 loop: true
@@ -73,14 +74,14 @@ class Menu extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl.texture.key == 'selected') {
+                this.sound.play('Select');
                 this.scene.start("levelselect1Scene");
+            } /*else if (this.tut.texture.key == 'selected') {
                 this.sound.play('Select');
-            } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
+            }*/ else if (this.htp.texture.key == 'selected') {
                 this.sound.play('Select');
-            } else if (this.htp.texture.key == 'selected') {
-                this.scene.start("level1Scene");
-                this.sound.play('Select');
+                this.scene.start("HowToScene");
                 //this.scene.start("howtoplay");
             }
         }.bind(this));

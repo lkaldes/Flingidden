@@ -29,7 +29,7 @@ class Level16 extends Phaser.Scene {
         this.game.sound.stopAll();
         this.sound.play('Start');
         //play music
-        this.loopingAudio = this.sound.add("SpaceMusic");
+        this.loopingAudio = this.sound.add("SpaceMusic").setVolume(0.2);
         this.loopingAudio.play({
             loop: true
         });
@@ -225,131 +225,137 @@ class Level16 extends Phaser.Scene {
             this.gameisPaused = true;
             this.victory(2);
         }
-        }
+    }
 
-        // launch mechanics when clicked
-        fling(pointer, player) {
-            if (this.menuSelect.texture.key == 'selected' && this.gameisPaused == false) {
-                this.pauseGame(true);
-                this.menuSelect.setDepth(0);
-                this.gameisPaused = true;
-            } else if (this.continueSelect.texture.key == 'selected') {
-                this.unpauseGame(false);
-                this.menuSelect.setDepth(3);
-            } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
-                this.scene.restart();
-            } else if (this.nextButton.texture.key == 'selected') {
-                this.scene.start("level17Scene");
-            } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
-                this.game.sound.stopAll();
-                isPlaying = false;
-                this.scene.start("menuScene");
-            } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
-                this.game.sound.stopAll();
-                isPlaying = false;
-                this.scene.start("levelselect4Scene");
-            } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
-                this.graphics.clear();
-                this.sound.play('Launch');
-                this.sticky = false;
-                this.slopey = 5 * (pointer.y - this.player.body.position.y);
-                this.slopex = 5 * (pointer.x - this.player.body.position.x);
-                this.player.setVelocity(this.slopex / 75, this.slopey / 75);
-                this.playerturn++;
-            }
-        }
-
-        createPauseScreen(){
-            this.veil = this.add.graphics({ x: 0, y: 0 });
-            this.veil.fillStyle('0x000000', 0.3);
-            this.veil.fillRect(0, 0, game.config.width, game.config.height);
-            this.veil.setDepth(2);
-            this.veil.setScrollFactor(0);
-
-            this.txt_pauseFlair = this.add.sprite(353, 360, 'selected').setScale(1.5).setAngle(90).setDepth(11);
-            this.txt_pause = this.add.text(360, 360, 'PAUSE', { font: '48px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(12).setScrollFactor(0);
-            this.continueSelect = this.physics.add.sprite(353, 420, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
-            this.continue = this.add.text(360, 420, 'Continue', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
-
-            this.resetlevelSelect = this.physics.add.sprite(353, 500, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
-            this.resetlevel = this.add.text(360, 500, 'Restart', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
-
-            this.mainMenuSelect = this.physics.add.sprite(353, 660, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
-            this.mainMenu = this.add.text(360, 660, 'Main Menu', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
-
-            this.levelSelect = this.physics.add.sprite(360, 580, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
-            this.level = this.add.text(360, 580, 'Level Select', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
-
-            this.menuBoarder = this.physics.add.sprite(360, 520, 'popup').setScale(12, 3).setSize(130,40).setDepth(9);
-
-            this.pauseGame(false);
-        }
-
-        pauseGame(is_visible){
-            this.veil.setVisible(is_visible);
-            this.txt_pause.setVisible(is_visible);
-            this.txt_pauseFlair.setVisible(is_visible);
-            this.continue.setVisible(is_visible);
-            this.continueSelect.setVisible(is_visible);
-            this.mainMenuSelect.setVisible(is_visible);
-            this.mainMenu.setVisible(is_visible);
-            this.mainMenuSelect.setVisible(is_visible);
-            this.mainMenu.setVisible(is_visible);
-            this.levelSelect.setVisible(is_visible);
-            this.level.setVisible(is_visible);
-            this.resetlevelSelect.setVisible(is_visible);
-            this.resetlevel.setVisible(is_visible);
-            this.menuBoarder.setVisible(is_visible);
-        }
-
-        unpauseGame(is_visible){
-            this.veil.setVisible(is_visible);
-            this.txt_pause.setVisible(is_visible);
-            this.txt_pauseFlair.setVisible(is_visible);
-            this.continue.setVisible(is_visible);
-            this.continueSelect.setVisible(is_visible);
-            this.mainMenuSelect.setVisible(is_visible);
-            this.mainMenu.setVisible(is_visible);
-            this.levelSelect.setVisible(is_visible);
-            this.level.setVisible(is_visible);
-            this.menuBoarder.setVisible(is_visible);
-            this.resetlevelSelect.setVisible(is_visible);
-            this.resetlevel.setVisible(is_visible);
-            this.time.addEvent({ delay: 500, callback: () => {this.gameisPaused = false}, callbackScope: this})
-        }
-
-        victory(player){
-            this.veil.setVisible(true);
-            this.game.sound.stopAll();
-            this.sound.play('Complete');
-            this.graphics.clear();
-            this.arrow.alpha = 0;
-            this.player.alpha = 0;
-            this.p1score.text = this.player1score;
-            this.p2score.text = this.player2score;
-            this.add.sprite(353, 350, 'header').setScale(10,4).setAngle(90).setDepth(2);
-            this.nextButton.setAlpha(1);
-            this.add.text(527, 520, 'Next Level', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
-            this.menuButton.setAlpha(1);
-            this.add.text(227, 520, 'Main Menu', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
-            this.restartButton.setAlpha(1);
-            this.add.text(227, 450, 'Restart', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
-            this.levelselectButton.setAlpha(1);
-            this.add.text(510, 450, 'Level Select', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
-            this.add.sprite(350, 220, 'selected').setScale(2,3.7).setAngle(90).setDepth(3);
-            this.winplayer = this.add.sprite(180, 345, '').setScale(1.7).setDepth(3);
-            if (player == 1) {
-                this.add.text(360, 220, 'PLAYER 1 WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
-            } else {
-                this.winplayer.setPosition(540, 345);
-                this.winplayer.flipX = true;
-                this.add.text(360, 220, 'PLAYER 2 WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
-            }
-            this.winplayer.anims.play('Idle');
-            this.add.sprite(353, 340, 'selected').setScale(1.5).setAngle(90).setDepth(3);
-            this.add.text(300, 340, this.player1score, { font: '60px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
-            this.add.text(420, 340, this.player2score, { font: '60px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
-            this.add.text(360, 340, '-', { font: '60px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+    // launch mechanics when clicked
+    fling(pointer, player) {
+        if (this.menuSelect.texture.key == 'selected' && this.gameisPaused == false) {
+            this.sound.play('Select');
+            this.pauseGame(true);
             this.menuSelect.setDepth(0);
+            this.gameisPaused = true;
+        } else if (this.continueSelect.texture.key == 'selected') {
+            this.sound.play('Select');
+            this.unpauseGame(false);
+            this.menuSelect.setDepth(3);
+        } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
+            this.sound.play('Select');
+            this.scene.restart();
+        } else if (this.nextButton.texture.key == 'selected') {
+            this.sound.play('Select');
+            this.scene.start("level17Scene");
+        } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
+            this.game.sound.stopAll();
+            this.sound.play('Select');
+            isPlaying = false;
+            this.scene.start("menuScene");
+        } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
+            this.game.sound.stopAll();
+            this.sound.play('Select');
+            isPlaying = false;
+            this.scene.start("levelselect4Scene");
+        } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
+            this.graphics.clear();
+            this.sound.play('Launch');
+            this.sticky = false;
+            this.slopey = 5 * (pointer.y - this.player.body.position.y);
+            this.slopex = 5 * (pointer.x - this.player.body.position.x);
+            this.player.setVelocity(this.slopex / 75, this.slopey / 75);
+            this.playerturn++;
         }
     }
+
+    createPauseScreen(){
+        this.veil = this.add.graphics({ x: 0, y: 0 });
+        this.veil.fillStyle('0x000000', 0.3);
+        this.veil.fillRect(0, 0, game.config.width, game.config.height);
+        this.veil.setDepth(2);
+        this.veil.setScrollFactor(0);
+
+        this.txt_pauseFlair = this.add.sprite(353, 360, 'selected').setScale(1.5).setAngle(90).setDepth(11);
+        this.txt_pause = this.add.text(360, 360, 'PAUSE', { font: '48px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(12).setScrollFactor(0);
+        this.continueSelect = this.physics.add.sprite(353, 420, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+        this.continue = this.add.text(360, 420, 'Continue', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+        this.resetlevelSelect = this.physics.add.sprite(353, 500, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+        this.resetlevel = this.add.text(360, 500, 'Restart', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+        this.mainMenuSelect = this.physics.add.sprite(353, 660, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+        this.mainMenu = this.add.text(360, 660, 'Main Menu', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+        this.levelSelect = this.physics.add.sprite(360, 580, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+        this.level = this.add.text(360, 580, 'Level Select', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+        this.menuBoarder = this.physics.add.sprite(360, 520, 'popup').setScale(12, 3).setSize(130,40).setDepth(9);
+
+        this.pauseGame(false);
+    }
+
+    pauseGame(is_visible){
+        this.veil.setVisible(is_visible);
+        this.txt_pause.setVisible(is_visible);
+        this.txt_pauseFlair.setVisible(is_visible);
+        this.continue.setVisible(is_visible);
+        this.continueSelect.setVisible(is_visible);
+        this.mainMenuSelect.setVisible(is_visible);
+        this.mainMenu.setVisible(is_visible);
+        this.mainMenuSelect.setVisible(is_visible);
+        this.mainMenu.setVisible(is_visible);
+        this.levelSelect.setVisible(is_visible);
+        this.level.setVisible(is_visible);
+        this.resetlevelSelect.setVisible(is_visible);
+        this.resetlevel.setVisible(is_visible);
+        this.menuBoarder.setVisible(is_visible);
+    }
+
+    unpauseGame(is_visible){
+        this.veil.setVisible(is_visible);
+        this.txt_pause.setVisible(is_visible);
+        this.txt_pauseFlair.setVisible(is_visible);
+        this.continue.setVisible(is_visible);
+        this.continueSelect.setVisible(is_visible);
+        this.mainMenuSelect.setVisible(is_visible);
+        this.mainMenu.setVisible(is_visible);
+        this.levelSelect.setVisible(is_visible);
+        this.level.setVisible(is_visible);
+        this.menuBoarder.setVisible(is_visible);
+        this.resetlevelSelect.setVisible(is_visible);
+        this.resetlevel.setVisible(is_visible);
+        this.time.addEvent({ delay: 500, callback: () => {this.gameisPaused = false}, callbackScope: this})
+    }
+
+    victory(player){
+        this.veil.setVisible(true);
+        this.game.sound.stopAll();
+        this.sound.play('Complete');
+        this.graphics.clear();
+        this.arrow.alpha = 0;
+        this.player.alpha = 0;
+        this.p1score.text = this.player1score;
+        this.p2score.text = this.player2score;
+        this.add.sprite(353, 350, 'header').setScale(10,4).setAngle(90).setDepth(2);
+        this.nextButton.setAlpha(1);
+        this.add.text(527, 520, 'Next Level', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+        this.menuButton.setAlpha(1);
+        this.add.text(227, 520, 'Main Menu', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+        this.restartButton.setAlpha(1);
+        this.add.text(227, 450, 'Restart', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+        this.levelselectButton.setAlpha(1);
+        this.add.text(510, 450, 'Level Select', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+        this.add.sprite(350, 220, 'selected').setScale(2,3.7).setAngle(90).setDepth(3);
+        this.winplayer = this.add.sprite(180, 345, '').setScale(1.7).setDepth(3);
+        if (player == 1) {
+            this.add.text(360, 220, 'PLAYER 1 WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+        } else {
+            this.winplayer.setPosition(540, 345);
+            this.winplayer.flipX = true;
+            this.add.text(360, 220, 'PLAYER 2 WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+        }
+        this.winplayer.anims.play('Idle');
+        this.add.sprite(353, 340, 'selected').setScale(1.5).setAngle(90).setDepth(3);
+        this.add.text(300, 340, this.player1score, { font: '60px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+        this.add.text(420, 340, this.player2score, { font: '60px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+        this.add.text(360, 340, '-', { font: '60px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.menuSelect.setDepth(0);
+    }
+}

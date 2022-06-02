@@ -14,7 +14,7 @@ class LevelSelect4 extends Phaser.Scene {
     create(){
 
         //audio
-        this.loopingAudio = this.sound.add("TitleMusic");
+        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.2);
         if(isPlaying == false){
             this.loopingAudio.play({
                 loop: true
@@ -77,20 +77,27 @@ class LevelSelect4 extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl16.scale > 0.125) {
+                this.sound.play('Start');
                 this.scene.start("level16Scene");
             } else if (this.lvl17.scale > 0.125) {
+                this.sound.play('Start');
                 this.scene.start("level17Scene");
             } else if (this.lvl18.scale > 0.125) {
+                this.sound.play('Start');
                 this.scene.start("level18Scene");
             } else if (this.lvl19.scale > 0.125) {
+                this.sound.play('Start');
                 this.scene.start("level19Scene");
             } else if (this.lvl20.scale > 0.125) {
+                this.sound.play('Start');
                 this.scene.start("level20Scene");
             } /*else if (this.rightarrow.scale > 1.25) {
                 this.scene.start("levelselect1Scene");
             } */else if (this.leftarrow.scale > 1.25) {
+                this.sound.play('Select');
                 this.scene.start("levelselect3Scene");
             }else if (this.menuButton.texture.key == 'selected') {
+                this.sound.play('Select');
                 this.scene.start("menuScene");
             } 
         }.bind(this));

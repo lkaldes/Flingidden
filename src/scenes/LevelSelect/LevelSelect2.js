@@ -4,11 +4,11 @@ class LevelSelect2 extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('lvl1', './assets/LevelScreenshots/Level1.png');
-        this.load.image('lvl2', './assets/LevelScreenshots/Level2.png');
-        this.load.image('lvl3', './assets/LevelScreenshots/Level3.png');
-        this.load.image('lvl4', './assets/LevelScreenshots/Level4.png');
-        this.load.image('lvl5', './assets/LevelScreenshots/Level5.png');
+        this.load.image('lvl6', './assets/LevelScreenshots/Level6.png');
+        this.load.image('lvl7', './assets/LevelScreenshots/Level7.png');
+        this.load.image('lvl8', './assets/LevelScreenshots/Level8.png');
+        this.load.image('lvl9', './assets/LevelScreenshots/Level9.png');
+        this.load.image('lvl10', './assets/LevelScreenshots/Level10.png');
     }
 
     create(){
@@ -24,11 +24,11 @@ class LevelSelect2 extends Phaser.Scene {
 
         this.add.tileSprite(0, 0, 720, 860, 'levelselect').setOrigin(0, 0);
 
-        this.lvl6 = this.add.image(180, 240, 'lvl1').setScale(0.125).setDepth(1).setInteractive();
-        this.lvl7 = this.add.image(540, 240, 'lvl2').setScale(0.125).setDepth(1).setInteractive();
-        this.lvl8 = this.add.image(120, 580, 'lvl3').setScale(0.125).setDepth(1).setInteractive();
-        this.lvl9 = this.add.image(360, 580, 'lvl4').setScale(0.125).setDepth(1).setInteractive();
-        this.lvl10 = this.add.image(600, 580, 'lvl5').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl6 = this.add.image(180, 240, 'lvl6').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl7 = this.add.image(540, 240, 'lvl7').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl8 = this.add.image(120, 580, 'lvl8').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl9 = this.add.image(360, 580, 'lvl9').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl10 = this.add.image(600, 580, 'lvl10').setScale(0.125).setDepth(1).setInteractive();
 
         this.add.image(175, 250, 'popup').setScale(5, 2.3);
         this.add.image(535, 250, 'popup').setScale(5, 2.3);
@@ -43,15 +43,15 @@ class LevelSelect2 extends Phaser.Scene {
         this.add.text(360, 810, 'Menu', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         
 
-        this.add.text(180, 120, 'The Basics', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(180, 120, 'Angles to the MAX!', { font: '24px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(180, 360, '2-1', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(540, 120, 'Angles!', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(540, 120, "No Gs", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(540, 360, '2-2', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(120, 460, "What's this goop?", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(120, 460, "Who Ordered a Triangle?", { font: '20px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(120, 700, '2-3', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 460, "Critical Bounce", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 460, "Thread the Needle", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 700, '2-4', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(600, 460, "All signs point mid", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(600, 460, "Fit IT In", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(600, 700, '2-5', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         
 

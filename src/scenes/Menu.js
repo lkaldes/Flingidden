@@ -6,7 +6,7 @@ class Menu extends Phaser.Scene {
     preload(){
         this.load.path = 'assets/';
         this.load.image('title', 'backgrounds/TitleScreen.png');
-        this.load.image('plain', 'backgrounds/background.png');
+        this.load.image('plain', 'backgrounds/howtopage.png');
         this.load.image('levelselect', 'backgrounds/LevelScreen.png');
         this.load.image('tutorial', 'backgrounds/TutorialBackground.png');
         this.load.image('kitchen', 'backgrounds/KB.png');

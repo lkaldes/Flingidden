@@ -58,16 +58,16 @@ class HowTo extends Phaser.Scene {
         // How to Play Text (configurable)
         this.add.sprite(350, 40, 'selected').setAngle(90).setScale(1.5, 2).setDepth(3);
         this.add.text(360, 40, 'HOW TO PLAY', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(250, 200, 'This is a 2 player turn based game.\n each player decides\nwhether they afe red or blue.\nOn your turn click the\ndirection and speed the slime will go', { font: '30px Impact', fill: '#1b2cc2'}).setDepth(3).setOrigin(0.5);
-        this.add.text(450, 400, 'The slime will bounce off\nof obstacles like these', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(230, 580, 'The main goal is to fling the\nslime to your colored goal', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(450, 750, 'Purple Slime may appear\nand the slime will stick to it', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(250, 200, 'This is a 2 player turn based game.\n each player decides\nwhether they are red or blue.\nOn your turn click in the\ndirection you want to go.\nThe launch velocity is determined by\nhow far away you click from the Slime.', { font: '28px Impact', fill: '#1b2cc2'}).setDepth(3).setOrigin(0.5);
+        this.add.text(450, 400, 'The Slime will bounce off\nof obstacles like these.', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(230, 580, 'The main goal is to fling the\nSlime to your colored goal.', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(450, 750, 'Purple slime may appear\nand the slime will stick to it.\nSome windmill obstacles have a special\nslime that turns off gravity for one turn.', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
 
         // Menu and Practice Buttons
         this.menuSelect = this.physics.add.sprite(93, 40, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3);
-        this.practiceSelect = this.physics.add.sprite(623, 40, 'unselected').setInteractive().setScale(1.5, 1.2).setAngle(90).setDepth(3);
+        this.tutorialSelect = this.physics.add.sprite(623, 40, 'unselected').setInteractive().setScale(1.5, 1.2).setAngle(90).setDepth(3);
         this.add.text(100, 40, 'Main Menu', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(630, 40, 'Practice', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(630, 40, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         
         // animation create
         this.anims.create({
@@ -138,7 +138,7 @@ class HowTo extends Phaser.Scene {
         if (this.menuSelect.texture.key == 'selected') {
             this.sound.play('Select');
             this.scene.start("menuScene");
-        } else if (this.practiceSelect.texture.key == 'selected') {
+        } else if (this.tutorialSelect.texture.key == 'selected') {
             this.sound.play('Select');
             this.scene.start("level0Scene");
         } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {

@@ -76,7 +76,7 @@ class Level8 extends Phaser.Scene {
         this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
         this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
         this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(360, 20, 'Who Ordered a Trianlge?', { font: '26px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         this.menuSelect = this.physics.add.sprite(670, 20, 'unselected').setInteractive().setAngle(90).setScale(0.5, 1).setSize(50,40).setDepth(2);
         this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
 

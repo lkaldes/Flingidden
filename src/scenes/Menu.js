@@ -55,7 +55,7 @@ class Menu extends Phaser.Scene {
 
         //play music
         //this.game.sound.stopAll();
-        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.2);
+        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.1);
         if(isPlaying == false){
             this.loopingAudio.play({
                 loop: true

@@ -333,11 +333,11 @@ class Level11 extends Phaser.Scene {
         this.add.sprite(350, 220, 'selected').setScale(2,3.7).setAngle(90).setDepth(3);
         this.winplayer = this.add.sprite(180, 345, '').setScale(1.7).setDepth(3);
         if (player == 1) {
-            this.add.text(360, 220, 'PLAYER 1 WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+            this.add.text(360, 220, 'RED WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
         } else {
             this.winplayer.setPosition(540, 345);
             this.winplayer.flipX = true;
-            this.add.text(360, 220, 'PLAYER 2 WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+            this.add.text(360, 220, 'BLUE WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
         }
         this.winplayer.anims.play('Idle');
         this.add.sprite(353, 340, 'selected').setScale(1.5).setAngle(90).setDepth(3);

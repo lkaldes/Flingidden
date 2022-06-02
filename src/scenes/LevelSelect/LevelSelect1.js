@@ -14,7 +14,7 @@ class LevelSelect1 extends Phaser.Scene {
     create(){
 
         //audio
-        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.2);
+        this.loopingAudio = this.sound.add("TitleMusic").setVolume(0.1);
         if(isPlaying == false){
             this.loopingAudio.play({
                 loop: true

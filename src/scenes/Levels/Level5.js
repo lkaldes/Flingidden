@@ -1,11 +1,11 @@
-class Level11 extends Phaser.Scene {
+class Level5 extends Phaser.Scene {
     constructor() {
         super({
-            key: "level11Scene",     
+            key: "level5Scene",     
             physics: {
                 //default: 'arcade',
                 arcade: {
-                    debug: true
+                    //debug: true
                 },
                 matter: {
                     gravity: {
@@ -17,7 +17,7 @@ class Level11 extends Phaser.Scene {
                         top: true,
                         bottom: true
                     },
-                    debug: true
+                    //debug: true
                 }
             }
         });
@@ -25,6 +25,7 @@ class Level11 extends Phaser.Scene {
 
     preload(){
         this.load.json('shapes', 'assets/Shapes.json');
+
     }
 
     create(){
@@ -32,14 +33,17 @@ class Level11 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'garden').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'kitchen').setOrigin(0, 0);
 
-        this.obstacle1 = this.matter.add.sprite(660, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
-        this.obstacle2 = this.matter.add.sprite(360, 680, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
-        this.obstacle1extend = this.matter.add.sprite(360, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
-        this.obstacle2extend = this.matter.add.sprite(50, 680, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(360, 100, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(8).setAngle(180);
+        this.obstacle2 = this.matter.add.sprite(360, 800, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(8)
+        this.obstacle3 = this.matter.add.sprite(45, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(90);
+        this.obstacle4 = this.matter.add.sprite(675, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(270);
+        this.obstacle5 = this.matter.add.sprite(720/2, 860/2, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
 
-        this.windmill = this.matter.add.sprite(360, 440, 'windmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(8);
+        this.sticky1 = this.matter.add.sprite(360, 395, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3);
+        this.sticky2 = this.matter.add.sprite(360, 470, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setOrigin(0.5, 0.52);
+        this.sticky1.flipY = true;
 
         
         this.playerturn = 0;
@@ -47,17 +51,17 @@ class Level11 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(180, 10, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(100, 10, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(540, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(620, 870, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(660, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(60, 805, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(40, 95, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(680, 815, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
         // UI properties
         this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
@@ -83,12 +87,12 @@ class Level11 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(180, 10);
+                this.player.setPosition(100, 10);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(540, 870);
+                this.player.setPosition(620, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {
@@ -103,21 +107,21 @@ class Level11 extends Phaser.Scene {
         // mouse functions
         this.pointer = this.input.activePointer;
         this.input.on('pointerup', this.fling.bind(this));
-    }
-
-    update(){
+     }
+ 
+     update(){
         // show/hide arrow whether ball is moving or not
-        if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1) {
+        if (Math.abs(this.player.body.velocity.x) < .1 && Math.abs(this.player.body.velocity.y) < 1) {
             this.arrow.alpha = 100;
             this.graphics.clear();
-            if (this.playerturn % 2 == 0) {
-                this.graphics.lineStyle(10, 0xd50000);
-            } else {
-                this.graphics.lineStyle(10, 0x2195f3);
-            }
-            this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
-            var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
-            this.arrow.setAngle(angle);
+        if (this.playerturn % 2 == 0) {
+            this.graphics.lineStyle(10, 0xd50000);
+        } else {
+            this.graphics.lineStyle(10, 0x2195f3);
+        }
+        this.graphics.lineBetween(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+        var angle = Phaser.Math.RAD_TO_DEG * Phaser.Math.Angle.Between(this.player.body.position.x, this.player.body.position.y, this.pointer.x, this.pointer.y);
+        this.arrow.setAngle(angle);
         } else {
             this.graphics.clear();
             this.arrow.alpha = 0;
@@ -143,15 +147,13 @@ class Level11 extends Phaser.Scene {
             this.matter.world.setGravity(0, 0);
             this.player.setVelocity(0);
         }
-        
-        this.windmill.angle += 1;
         //update score
         this.p1score.text = this.player1score;
         this.p2score.text = this.player2score;
-    }
-
-    // launch mechanics chen clicked
-    fling(pointer, player) {
+     }
+ 
+     // launch mechanics chen clicked
+     fling(pointer, player) {
         if (pointer.y < 40 && pointer.x > 630) {
             // ENTER MENU FUNCTION HERE
         } else if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
@@ -162,9 +164,10 @@ class Level11 extends Phaser.Scene {
             this.player.setVelocity(this.slopex / 75, this.slopey / 75);
             this.playerturn++;
         }
-    }
-       
-    nextlevel(){
-        this.scene.start("level12Scene");
-    }
-}
+     }
+ 
+     nextlevel(){
+         this.scene.start("level6Scene");
+     }
+ }
+ 

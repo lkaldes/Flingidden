@@ -5,7 +5,7 @@ class Level8 extends Phaser.Scene {
             physics: {
                 //default: 'arcade',
                 arcade: {
-                    debug: true
+                    //debug: true
                 },
                 matter: {
                     gravity: {
@@ -17,7 +17,7 @@ class Level8 extends Phaser.Scene {
                         top: true,
                         bottom: true
                     },
-                    debug: true
+                    //debug: true
                 }
             }
         });

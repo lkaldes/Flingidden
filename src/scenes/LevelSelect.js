@@ -1,6 +1,6 @@
-class Menu extends Phaser.Scene {
+class LevelSelect extends Phaser.Scene {
     constructor() {
-        super("menuScene");
+        super("levelselectScene");
     }
     
     preload(){
@@ -47,11 +47,10 @@ class Menu extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl.texture.key == 'selected') {
-                this.scene.start("levelselectScene");
+                this.scene.start("level2Scene");
             } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
             } else if (this.htp.texture.key == 'selected') {
-                this.scene.start("level5Scene");
                 //this.scene.start("howtoplay");
             }
         }.bind(this));

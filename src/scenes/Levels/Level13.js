@@ -1,11 +1,11 @@
-class Level16 extends Phaser.Scene {
+class Level13 extends Phaser.Scene {
     constructor() {
         super({
-            key: "level16Scene",     
+            key: "level13Scene",     
             physics: {
                 //default: 'arcade',
                 arcade: {
-                    debug: true
+                    //debug: true
                 },
                 matter: {
                     gravity: {
@@ -17,7 +17,7 @@ class Level16 extends Phaser.Scene {
                         top: true,
                         bottom: true
                     },
-                    debug: true
+                    //debug: true
                 }
             }
         });
@@ -32,21 +32,18 @@ class Level16 extends Phaser.Scene {
         //this.matter.world.disableGravity();
         this.shapes = this.cache.json.get('shapes');
         //movement and scene creation
-        this.add.tileSprite(0, 0, 720, 860, 'space').setOrigin(0, 0);
+        this.add.tileSprite(0, 0, 720, 860, 'garden').setOrigin(0, 0);
 
-        this.obstacle1 = this.matter.add.sprite(660, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
-        this.obstacle2 = this.matter.add.sprite(60, 200, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2.5).setAngle(90);
-        this.obstacle3 = this.matter.add.sprite(360, 380, 'circleobstacle', null, { isStatic: true, shape: this.shapes.circleobstacle }).setScale(3);
-        this.obstacle4 = this.matter.add.sprite(-40, 680, 'circleobstacle', null, { isStatic: true, shape: this.shapes.circleobstacle }).setScale(4);
-        this.obstacle4 = this.matter.add.sprite(780, 680, 'circleobstacle', null, { isStatic: true, shape: this.shapes.circleobstacle }).setScale(4);
-        this.obstacle4 = this.matter.add.sprite(360, 900, 'circleobstacle', null, { isStatic: true, shape: this.shapes.circleobstacle }).setScale(4);
+        this.obstacle1 = this.matter.add.sprite(640, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle2 = this.matter.add.sprite(80, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1extend = this.matter.add.sprite(540, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle2extend = this.matter.add.sprite(180, 270, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
 
-        this.sticky1 = this.matter.add.sprite(140, 150, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setOrigin(0.5, 0.47);
-        this.sticky2 = this.matter.add.sprite(140, 250, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setOrigin(0.5, 0.53);
-        this.sticky3 = this.matter.add.sprite(580, 150, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setOrigin(0.5, 0.47);
-        this.sticky4 = this.matter.add.sprite(580, 250, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setOrigin(0.5, 0.53);
+        this.stickywindmill1 = this.matter.add.sprite(200, 640, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
+        this.stickywindmill2 = this.matter.add.sprite(520, 640, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(6);
+        this.stickywindmill3 = this.matter.add.sprite(360, 135, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(4);
 
-        this.stickywindmill = this.matter.add.sprite(360, 640, 'stickywindmill', null, { isStatic: true, shape: this.shapes.windmill }).setScale(4);
+        //this.sticky1 = this.matter.add.sprite(160, 570, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(2).setAngle(55);
 
         
         this.playerturn = 0;
@@ -54,11 +51,11 @@ class Level16 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(580, 870, 'circle', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(360, 870, 'circle', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(140, 870, 'circle', null, { shape: this.shapes.circle });
-            this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
+            this.player = this.matter.add.sprite(360, 870, 'circle', null, { shape: this.shapes.circle });
+            this.arrow = this.physics.add.sprite(720/2, 870, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
 
@@ -90,12 +87,12 @@ class Level16 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(580, 870);
+                this.player.setPosition(360, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(140, 870);
+                this.player.setPosition(360, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {
@@ -145,19 +142,19 @@ class Level16 extends Phaser.Scene {
         // set gravity of ball based on side of screen
         if (!this.sticky) {
             this.player.setFriction(1);
-            this.matter.world.setGravity(0, this.gravity);
-            /*if (this.player.body.position.y < 430) {
+            if (this.player.body.position.y < 430) {
                 this.matter.world.setGravity(0, -this.gravity);
             } else if (this.player.body.position.y > 430){
                 this.matter.world.setGravity(0, this.gravity);
             }
-            */
         } else {
             this.matter.world.setGravity(0, 0);
             this.player.setVelocity(0);
         }
         
-        this.stickywindmill.angle += 1;
+        this.stickywindmill1.angle += 1;
+        this.stickywindmill2.angle += 1;
+        this.stickywindmill3.angle += 1;
         //update score
         this.p1score.text = this.player1score;
         this.p2score.text = this.player2score;
@@ -178,6 +175,6 @@ class Level16 extends Phaser.Scene {
     }
        
     nextlevel(){
-        this.scene.start("level17Scene");
+        this.scene.start("level14Scene");
     }
 }

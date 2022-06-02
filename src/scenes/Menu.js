@@ -77,7 +77,6 @@ class Menu extends Phaser.Scene {
             } else if (this.htp.texture.key == 'selected') {
                 this.sound.play('Select');
                 this.scene.start("HowToScene");
-                //this.scene.start("howtoplay");
             }
         }.bind(this));
     } 

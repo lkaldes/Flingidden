@@ -61,7 +61,7 @@ class HowTo extends Phaser.Scene {
         this.add.text(360, 40, 'HOW TO PLAY', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         this.add.text(250, 200, 'This is a 2 player turn based game.\nEach player decides\nwhether they are red or blue.\nOn your turn click in the\ndirection you want to go.\nThe launch velocity is determined by >>\nhow far away you click from the Slime.', { font: '28px Impact', fill: '#1b2cc2', align: 'center'}).setDepth(3).setOrigin(0.5);
         this.add.text(450, 400, '<< The Slime will bounce off\nof obstacles like these.', { font: '30px Impact', fill: '#1b2cc2', align: 'center'}).setOrigin(0.5).setDepth(3);
-        this.add.text(230, 580, 'The main goal is to fling the >>\nSlime to your colored goal.', { font: '30px Impact', fill: '#1b2cc2', align: 'center'}).setOrigin(0.5).setDepth(3);
+        this.add.text(230, 580, 'The main goal is to fling the >>\nSlime to your colored goal.\nFirst to 3 goals wins the match.', { font: '30px Impact', fill: '#1b2cc2', align: 'center'}).setOrigin(0.5).setDepth(3);
         this.add.text(450, 750, '<< Purple slime may appear\nand the slime will stick to it.\nSome windmill obstacles have a blue\nslime that turns off gravity for one turn.', { font: '30px Impact', fill: '#1b2cc2', align: 'center'}).setOrigin(0.5).setDepth(3);
 
         // Menu and Practice Buttons

@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene {
     }
     
     preload(){
-        this.load.image('circle', './assets/circle.png');
+        this.load.image('circle', './assets/slime.png');
         this.load.image('title', './assets/TitleScreen.png');
         this.load.image('levelselect', './assets/LevelScreen.png');
         this.load.image('tutorial', './assets/TutorialBackground.png');
@@ -25,10 +25,22 @@ class Menu extends Phaser.Scene {
         this.load.image('goal2', './assets/redgoal.png');
         this.load.image('arrowp2', './assets/blueArrow.png');
         this.load.image('arrowp1', './assets/redArrow.png');
-        this.load.audio('bounce', './assets/BallBounceSound.wav');
+        this.load.audio('bounce', './assets/SlimeCollide.wav');
         this.load.image('unselected', './assets/obstacle.png');
         this.load.image('selected', './assets/slimerectangle.png');
         this.load.image('popup', './assets/obstacle.png');
+
+        this.load.audio('Select', './assets/LevelSelect.wav');
+        this.load.audio('Complete', './assets/LevelComplete.wav');
+        this.load.audio('Launch', './assets/SlimeLaunch.wav');
+        this.load.audio('Start', './assets/LevelStart.wav');
+
+
+        //added music
+        this.load.audio('LevelMusic','./assets/Chill.mp3');
+
+        //load slime animation
+        //this.load.atlas('slime_atlas', 'slimeanimation.png', 'linkmap.json');
     }
 
     create(){
@@ -40,6 +52,16 @@ class Menu extends Phaser.Scene {
         this.add.text(360, 340, 'Tutorial', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 560, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
+
+        this.game.sound.stopAll();
+        //play music
+        //this.sound.play('LevelMusic');
+        this.loopingAudio = this.sound.add("LevelMusic");
+        this.loopingAudio.play({
+            loop: true
+        });
+
+
         this.input.on('gameobjectover', function (pointer, gameObject) {
             gameObject.setTexture('selected');
         });
@@ -49,10 +71,13 @@ class Menu extends Phaser.Scene {
         this.input.on('pointerup', function (pointer) {
             if (this.lvl.texture.key == 'selected') {
                 this.scene.start("levelselect1Scene");
+                this.sound.play('Select');
             } else if (this.tut.texture.key == 'selected') {
                 this.scene.start("level0Scene");
+                this.sound.play('Select');
             } else if (this.htp.texture.key == 'selected') {
                 this.scene.start("level7Scene");
+                this.sound.play('Select');
                 //this.scene.start("howtoplay");
             }
         }.bind(this));

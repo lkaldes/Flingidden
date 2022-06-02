@@ -40,7 +40,6 @@ class HowTo extends Phaser.Scene {
         this.add.sprite(100, 400, 'triangle').setScale(2);
         this.add.sprite(570, 580, 'goal2').setScale(1);
         this.add.sprite(100, 750, 'sticky').setScale(2, 5).setAngle(90);
-        this.add.sprite(350, 40, 'selected').setAngle(90).setScale(1.5, 2);
         this.obstacle1 = this.matter.add.sprite(530, 350, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAngle(90).setAlpha(0);
         this.obstacle1 = this.matter.add.sprite(400, 240, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(4).setAlpha(0);
         this.player = this.matter.add.sprite(630, 340, '', null, { shape: this.shapes.circle });
@@ -57,17 +56,18 @@ class HowTo extends Phaser.Scene {
         this.matter.world.setGravity(0, 0.5);
 
         // How to Play Text (configurable)
-        this.add.text(360, 40, 'HOW TO PLAY', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(250, 200, 'This is a 2 player turn based game.\n each player decides\nwhether they afe red or blue.\nOn your turn click the\ndirection and speed the slime will go', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(450, 400, 'The slime will bounce off\nof obstacles like these', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(230, 580, 'The main goal is to fling the\nslime to your colored goal', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(450, 750, 'Purple Slime may appear\nand the slime will stick to it', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.sprite(350, 40, 'selected').setAngle(90).setScale(1.5, 2).setDepth(3);
+        this.add.text(360, 40, 'HOW TO PLAY', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(250, 200, 'This is a 2 player turn based game.\n each player decides\nwhether they afe red or blue.\nOn your turn click the\ndirection and speed the slime will go', { font: '30px Impact', fill: '#1b2cc2'}).setDepth(3).setOrigin(0.5);
+        this.add.text(450, 400, 'The slime will bounce off\nof obstacles like these', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(230, 580, 'The main goal is to fling the\nslime to your colored goal', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(450, 750, 'Purple Slime may appear\nand the slime will stick to it', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
 
         // Menu and Practice Buttons
-        this.menuSelect = this.physics.add.sprite(93, 40, 'unselected').setInteractive().setScale(1.5).setAngle(90);
-        this.practiceSelect = this.physics.add.sprite(623, 40, 'unselected').setInteractive().setScale(1.5, 1.2).setAngle(90);
-        this.add.text(100, 40, 'Main Menu', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(630, 40, 'Practice', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.menuSelect = this.physics.add.sprite(93, 40, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3);
+        this.practiceSelect = this.physics.add.sprite(623, 40, 'unselected').setInteractive().setScale(1.5, 1.2).setAngle(90).setDepth(3);
+        this.add.text(100, 40, 'Main Menu', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(630, 40, 'Practice', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         
         // animation create
         this.anims.create({

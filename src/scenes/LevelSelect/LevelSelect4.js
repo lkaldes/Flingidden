@@ -85,13 +85,13 @@ class LevelSelect4 extends Phaser.Scene {
             } else if (this.lvl18.scale > 0.125) {
                 this.sound.play('Start');
                 this.scene.start("level18Scene");
-            } else if (this.lvl19.scale > 0.125) {
+            }/* else if (this.lvl19.scale > 0.125) {
                 this.sound.play('Start');
                 this.scene.start("level19Scene");
             } else if (this.lvl20.scale > 0.125) {
                 this.sound.play('Start');
                 this.scene.start("level20Scene");
-            } /*else if (this.rightarrow.scale > 1.25) {
+            } */ /*else if (this.rightarrow.scale > 1.25) {
                 this.scene.start("levelselect1Scene");
             } */else if (this.leftarrow.scale > 1.25) {
                 this.sound.play('Select');

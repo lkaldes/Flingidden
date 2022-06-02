@@ -188,7 +188,7 @@ class Level12 extends Phaser.Scene {
         } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
             this.scene.restart();
         } else if (this.nextButton.texture.key == 'selected') {
-            this.scene.start("level1Scene");
+            this.scene.start("level13Scene");
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {

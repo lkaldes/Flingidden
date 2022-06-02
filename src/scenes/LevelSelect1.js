@@ -37,11 +37,11 @@ class LevelSelect1 extends Phaser.Scene {
         this.add.text(180, 360, '1-1', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(540, 120, 'Angles!', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(540, 360, '1-2', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(120, 460, "What's this goop?", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(120, 460, "What's this Goop?", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(120, 700, '1-3', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 460, "Critical Bounce", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(360, 700, '1-4', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(600, 460, "All signs point mid", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(600, 460, "All Signs Point Mid", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(600, 700, '1-5', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         
 

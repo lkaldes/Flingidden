@@ -66,14 +66,30 @@ class Level16 extends Phaser.Scene {
         this.goal1 = this.matter.add.sprite(660, 105, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         this.goal2 = this.matter.add.sprite(60, 105, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
-        // UI properties
-        this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90);
-        this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5);
-        this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5);
-        this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        
+       // UI properties
+       this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90).setDepth(2);
+       this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+       this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+       this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+       this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+       this.menuSelect = this.physics.add.sprite(670, 9, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(50,40).setDepth(2);
+       this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+
+       this.nextButton = this.physics.add.sprite(520, 520, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3).setAlpha(0);
+       this.menuButton = this.physics.add.sprite(220, 520, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3).setAlpha(0);
+       this.levelselectButton = this.physics.add.sprite(500, 450, 'unselected').setInteractive().setScale(1.5, 1.7).setAngle(90).setDepth(3).setAlpha(0);
+       this.restartButton = this.physics.add.sprite(220, 450, 'unselected').setInteractive().setScale(1.5).setAngle(90).setDepth(3).setAlpha(0);
+
+       // pause game
+       this.gameisPaused = false;
+       this.createPauseScreen();
+
+       this.input.on('gameobjectover', function (pointer, gameObject) {
+           gameObject.setTexture('selected');
+       });
+       this.input.on('gameobjectout', function (pointer, gameObject) {
+           gameObject.setTexture('unselected');
+       });
         // ball/arrow properties
         this.slopey = 0.0;
         this.slopex = 0.0;
@@ -158,26 +174,132 @@ class Level16 extends Phaser.Scene {
         }
         
         this.stickywindmill.angle += 1;
+
         //update score
         this.p1score.text = this.player1score;
         this.p2score.text = this.player2score;
-    }
+        if (this.player1score == 3 && !this.gameisPaused) {
+            this.gameisPaused = true;
+            this.victory(1);
+        } else if (this.player2score == 3 && !this.gameisPaused) {
+            this.gameisPaused = true;
+            this.victory(2);
+        }
+        }
 
-    // launch mechanics chen clicked
-    fling(pointer, player) {
-        if (pointer.y < 40 && pointer.x > 630) {
-            // ENTER MENU FUNCTION HERE
-        } else if (Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
+        // launch mechanics when clicked
+        fling(pointer, player) {
+            if (this.menuSelect.texture.key == 'selected' && this.gameisPaused == false) {
+                this.pauseGame(true);
+                this.menuSelect.setDepth(0);
+                this.gameisPaused = true;
+            } else if (this.continueSelect.texture.key == 'selected') {
+                this.unpauseGame(false);
+                this.menuSelect.setDepth(3);
+            } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
+                this.scene.restart();
+            } else if (this.nextButton.texture.key == 'selected') {
+                this.scene.start("level17Scene");
+            } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
+                this.scene.start("menuScene");
+            } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {
+                this.scene.start("levelselect4Scene");
+            } else if(!this.gameisPaused && Math.abs(this.player.body.velocity.x) < 0.1 && Math.abs(this.player.body.velocity.y) < 1 && pointer.y > 40) {
+                this.graphics.clear();
+                this.sticky = false;
+                this.slopey = 5 * (pointer.y - this.player.body.position.y);
+                this.slopex = 5 * (pointer.x - this.player.body.position.x);
+                this.player.setVelocity(this.slopex / 75, this.slopey / 75);
+                this.playerturn++;
+            }
+        }
+
+        createPauseScreen(){
+            this.veil = this.add.graphics({ x: 0, y: 0 });
+            this.veil.fillStyle('0x000000', 0.3);
+            this.veil.fillRect(0, 0, game.config.width, game.config.height);
+            this.veil.setDepth(2);
+            this.veil.setScrollFactor(0);
+
+            this.txt_pauseFlair = this.add.sprite(353, 360, 'selected').setScale(1.5).setAngle(90).setDepth(11);
+            this.txt_pause = this.add.text(360, 360, 'PAUSE', { font: '48px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(12).setScrollFactor(0);
+            this.continueSelect = this.physics.add.sprite(353, 420, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+            this.continue = this.add.text(360, 420, 'Continue', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+            this.resetlevelSelect = this.physics.add.sprite(353, 500, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+            this.resetlevel = this.add.text(360, 500, 'Restart', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+            this.mainMenuSelect = this.physics.add.sprite(353, 660, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+            this.mainMenu = this.add.text(360, 660, 'Main Menu', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+            this.levelSelect = this.physics.add.sprite(360, 580, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40).setDepth(10);
+            this.level = this.add.text(360, 580, 'Level Select', { font: '30px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(12).setScrollFactor(0).setDepth(11);
+
+            this.menuBoarder = this.physics.add.sprite(360, 520, 'popup').setScale(12, 3).setSize(130,40).setDepth(9);
+
+            this.pauseGame(false);
+        }
+
+        pauseGame(is_visible){
+            this.veil.setVisible(is_visible);
+            this.txt_pause.setVisible(is_visible);
+            this.txt_pauseFlair.setVisible(is_visible);
+            this.continue.setVisible(is_visible);
+            this.continueSelect.setVisible(is_visible);
+            this.mainMenuSelect.setVisible(is_visible);
+            this.mainMenu.setVisible(is_visible);
+            this.mainMenuSelect.setVisible(is_visible);
+            this.mainMenu.setVisible(is_visible);
+            this.levelSelect.setVisible(is_visible);
+            this.level.setVisible(is_visible);
+            this.resetlevelSelect.setVisible(is_visible);
+            this.resetlevel.setVisible(is_visible);
+            this.menuBoarder.setVisible(is_visible);
+        }
+
+        unpauseGame(is_visible){
+            this.veil.setVisible(is_visible);
+            this.txt_pause.setVisible(is_visible);
+            this.txt_pauseFlair.setVisible(is_visible);
+            this.continue.setVisible(is_visible);
+            this.continueSelect.setVisible(is_visible);
+            this.mainMenuSelect.setVisible(is_visible);
+            this.mainMenu.setVisible(is_visible);
+            this.levelSelect.setVisible(is_visible);
+            this.level.setVisible(is_visible);
+            this.menuBoarder.setVisible(is_visible);
+            this.resetlevelSelect.setVisible(is_visible);
+            this.resetlevel.setVisible(is_visible);
+            this.time.addEvent({ delay: 500, callback: () => {this.gameisPaused = false}, callbackScope: this})
+        }
+
+        victory(player){
+            this.veil.setVisible(true);
+            //this.sound.play('levelcomplete');
             this.graphics.clear();
-            this.sticky = false;
-            this.slopey = 5 * (pointer.y - this.player.body.position.y);
-            this.slopex = 5 * (pointer.x - this.player.body.position.x);
-            this.player.setVelocity(this.slopex / 75, this.slopey / 75);
-            this.playerturn++;
+            this.arrow.alpha = 0;
+            this.player.alpha = 0;
+            this.p1score.text = this.player1score;
+            this.p2score.text = this.player2score;
+            this.add.sprite(353, 350, 'header').setScale(10,4).setAngle(90).setDepth(2);
+            this.nextButton.setAlpha(1);
+            this.add.text(527, 520, 'Next Level', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+            this.menuButton.setAlpha(1);
+            this.add.text(227, 520, 'Main Menu', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+            this.restartButton.setAlpha(1);
+            this.add.text(227, 450, 'Restart', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+            this.levelselectButton.setAlpha(1);
+            this.add.text(510, 450, 'Level Select', { font: '40px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(4);
+            this.add.sprite(350, 220, 'selected').setScale(2,3.7).setAngle(90).setDepth(3);
+            if (player == 1) {
+                this.add.text(360, 220, 'PLAYER 1 WINS!', { font: '70px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+            } else {
+                this.add.text(360, 220, 'PLAYER 2 WINS!', { font: '70px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+            }
+            this.add.sprite(353, 340, 'selected').setScale(1.5).setAngle(90).setDepth(3);
+            this.add.text(300, 340, this.player1score, { font: '60px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
+            this.add.text(420, 340, this.player2score, { font: '60px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
+            this.add.text(360, 340, '-', { font: '60px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+            this.menuSelect.setDepth(0);
         }
     }
-       
-    nextlevel(){
-        this.scene.start("level17Scene");
-    }
-}

@@ -68,7 +68,7 @@ class Level5 extends Phaser.Scene {
         this.p1score = this.add.text(50, 20, '0', { font: '28px Impact', fill: '#d50000'}).setOrigin(0.5).setDepth(3);
         this.p2score = this.add.text(130, 20, '0', { font: '28px Impact', fill: '#2195f3'}).setOrigin(0.5).setDepth(3);
         this.add.text(90, 20, '-', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
-        this.add.text(360, 20, 'Tutorial', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
+        this.add.text(360, 20, 'All Signs Point Mid', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
         this.menuSelect = this.physics.add.sprite(670, 9, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(50,40).setDepth(2);
         this.menu = this.add.text(670, 20, 'Menu', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5).setDepth(3);
 
@@ -190,7 +190,7 @@ class Level5 extends Phaser.Scene {
         } else if (this.restartButton.texture.key == 'selected' || this.resetlevelSelect.texture.key == 'selected') {
             this.scene.restart();
         } else if (this.nextButton.texture.key == 'selected') {
-            this.scene.start("level1Scene");
+            this.scene.start("level6Scene");
         } else if (this.menuButton.texture.key == 'selected' || this.mainMenuSelect.texture.key == 'selected') {
             this.scene.start("menuScene");
         } else if (this.levelSelect.texture.key == 'selected' || this.levelselectButton.texture.key == 'selected') {

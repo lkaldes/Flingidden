@@ -21,10 +21,10 @@ class Menu extends Phaser.Scene {
         this.load.image('windmill', 'obstacles/windmill.png');
         this.load.image('stickywindmill', 'obstacles/stickywindmill.png');
         this.load.image('sticky', 'obstacles/stickyslime.png');
-        this.load.image('unselected', 'obstacles/obstacle.png');
+        this.load.image('unselected', 'obstacles/Border.png');
         this.load.image('selected', 'obstacles/slimerectangle.png');
-        this.load.image('popup', 'obstacles/obstacle.png');
-        this.load.image('header', 'obstacles/obstacle.png');
+        this.load.image('popup', 'obstacles/Border.png');
+        this.load.image('header', 'obstacles/Border.png');
         this.load.image('goal1', 'bluegoal.png');
         this.load.image('goal2', 'redgoal.png');
         this.load.image('arrowp2', 'slime/blueArrow.png');

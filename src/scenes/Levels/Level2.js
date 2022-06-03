@@ -49,10 +49,10 @@ class Level2 extends Phaser.Scene {
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, '', null, { shape: this.shapes.circle }).setAngle(180);
+            this.player = this.matter.add.sprite(280, 40, '', null, { shape: this.shapes.circle }).setAngle(180);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, '', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(440, 870, '', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
@@ -130,12 +130,12 @@ class Level2 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(130, 40);
+                this.player.setPosition(280, 40);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(590, 870);
+                this.player.setPosition(440, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else {

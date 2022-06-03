@@ -38,33 +38,37 @@ class Level5 extends Phaser.Scene {
         //movement and scene creation
         this.add.tileSprite(0, 0, 720, 860, 'kitchen').setOrigin(0, 0);
 
-        this.obstacle1 = this.matter.add.sprite(360, 100, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(8).setAngle(180);
-        this.obstacle2 = this.matter.add.sprite(360, 800, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(8)
-        this.obstacle3 = this.matter.add.sprite(45, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(90);
-        this.obstacle4 = this.matter.add.sprite(675, 440, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(5).setAngle(270);
-        this.obstacle5 = this.matter.add.sprite(720/2, 860/2, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(2).setAngle(90);
+        this.obstacle1 = this.matter.add.sprite(240, 90, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(180);
+        this.obstacle2 = this.matter.add.sprite(480, 810, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5);
+        this.obstacle3 = this.matter.add.sprite(480, 90, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(90);
+        this.obstacle4 = this.matter.add.sprite(240, 810, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(270);
+        this.obstacle5 = this.matter.add.sprite(45, 560, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(90);
+        this.obstacle6 = this.matter.add.sprite(675, 320, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(270);
+        this.obstacle7 = this.matter.add.sprite(45, 320, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5);
+        this.obstacle8 = this.matter.add.sprite(675, 560, 'triangle', null, { isStatic: true, shape: this.shapes.triangle }).setScale(2.5).setAngle(180);
+        this.obstacle9 = this.matter.add.sprite(720/2, 860/2, 'obstacle', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(3,1).setAngle(90);
 
-        this.sticky1 = this.matter.add.sprite(360, 395, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3);
-        this.sticky2 = this.matter.add.sprite(360, 470, 'sticky', null, { isStatic: true, shape: this.shapes.horizontal_slime }).setScale(3).setOrigin(0.5, 0.52);
-        this.sticky1.flipY = true;
-
+        this.obstacle10 = this.matter.add.sprite(290, 430, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(2.5).setAngle(270);
+        this.obstacle11 = this.matter.add.sprite(420, 430, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(2.5).setAngle(90);
+        this.obstacle12 = this.matter.add.sprite(360, 300, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(2.5);
+        this.obstacle13 = this.matter.add.sprite(360, 560, 'eqtriangle', null, { isStatic: true, shape: this.shapes.equaltriangle }).setScale(2.5).setAngle(180);
         
         this.playerturn = 0;
         this.player1score = 0;
         this.player2score = 0;
         // flip a coin to determine starting position
         if (Phaser.Math.Between(1,2) == 1) {
-            this.player = this.matter.add.sprite(100, 10, '', null, { shape: this.shapes.circle }).setAngle(180);
+            this.player = this.matter.add.sprite(360, 40, '', null, { shape: this.shapes.circle }).setAngle(180);
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp2').setSize(30, 30).setOrigin(-0.31,0.45);
         } else {
-            this.player = this.matter.add.sprite(620, 870, '', null, { shape: this.shapes.circle });
+            this.player = this.matter.add.sprite(360, 870, '', null, { shape: this.shapes.circle });
             this.arrow = this.physics.add.sprite(720/2, 430, 'arrowp1').setSize(30, 30).setOrigin(-0.31,0.45);
             this.playerturn++;
         }
 
         // create goals
-        this.goal1 = this.matter.add.sprite(40, 95, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
-        this.goal2 = this.matter.add.sprite(680, 815, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal1 = this.matter.add.sprite(40, 440, 'goal1', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
+        this.goal2 = this.matter.add.sprite(680, 440, 'goal2', null, { isStatic: true, shape: this.shapes.tempgoal}).setScale(0.75);
         
         // UI properties
         this.scoreboard = this.matter.add.sprite(350, -80, 'header', null, { isStatic: true, shape: this.shapes.obstacle }).setScale(6).setAngle(90).setDepth(2);
@@ -135,12 +139,12 @@ class Level5 extends Phaser.Scene {
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal1') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal1')) {
                 this.player2score++;
-                this.player.setPosition(130, 40);
+                this.player.setPosition(360, 40);
                 this.player.setVelocity(0);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
-                this.player.setPosition(590, 870);
+                this.player.setPosition(360, 870);
                 this.player.setVelocity(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {

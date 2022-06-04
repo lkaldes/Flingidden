@@ -63,7 +63,6 @@ class Menu extends Phaser.Scene {
             isPlaying = true;
         }
 
-
         this.input.on('gameobjectover', function (pointer, gameObject) {
             gameObject.setTexture('selected');
         });

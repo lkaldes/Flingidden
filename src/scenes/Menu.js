@@ -41,28 +41,6 @@ class Menu extends Phaser.Scene {
         this.load.audio('IntersectionMusic','sounds/IntersectionMusic.mp3');
         this.load.json('shapes', 'obstacles/Shapes.json');
 
-        //Level select Images
-        this.load.image('lvl1', './assets/LevelScreenshots/Level1.png');
-        this.load.image('lvl2', './assets/LevelScreenshots/Level2.png');
-        this.load.image('lvl3', './assets/LevelScreenshots/Level3.png');
-        this.load.image('lvl4', './assets/LevelScreenshots/Level4.png');
-        this.load.image('lvl5', './assets/LevelScreenshots/Level5.png');
-        this.load.image('lvl6', './assets/LevelScreenshots/Level6.png');
-        this.load.image('lvl7', './assets/LevelScreenshots/Level7.png');
-        this.load.image('lvl8', './assets/LevelScreenshots/Level8.png');
-        this.load.image('lvl9', './assets/LevelScreenshots/Level9.png');
-        this.load.image('lvl10', './assets/LevelScreenshots/Level10.png');
-        this.load.image('lvl11', './assets/LevelScreenshots/Level11.png');
-        this.load.image('lvl12', './assets/LevelScreenshots/Level12.png');
-        this.load.image('lvl13', './assets/LevelScreenshots/Level13.png');
-        this.load.image('lvl14', './assets/LevelScreenshots/Level14.png');
-        this.load.image('lvl15', './assets/LevelScreenshots/Level15.png');
-        this.load.image('lvl16', './assets/LevelScreenshots/Level16.png');
-        this.load.image('lvl17', './assets/LevelScreenshots/Level17.png');
-        this.load.image('lvl18', './assets/LevelScreenshots/Level18.png');
-        //this.load.image('lvl19', './assets/LevelScreenshots/Level19.png');
-        //this.load.image('lvl20', './assets/LevelScreenshots/Level20.png');
-
         //load slime animation
         this.load.atlas('slime_atlas', 'slime/slimeanimation.png', 'slime/slimemap.json');
     }

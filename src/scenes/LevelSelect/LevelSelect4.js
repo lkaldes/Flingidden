@@ -26,15 +26,15 @@ class LevelSelect4 extends Phaser.Scene {
 
         this.lvl16 = this.add.image(180, 240, 'lvl16').setScale(0.125).setDepth(1).setInteractive();
         this.lvl17 = this.add.image(540, 240, 'lvl17').setScale(0.125).setDepth(1).setInteractive();
-        this.lvl18 = this.add.image(120, 580, 'lvl18').setScale(0.125).setDepth(1).setInteractive();
+        this.lvl18 = this.add.image(365, 580, 'lvl18').setScale(0.125).setDepth(1).setInteractive();
         //this.lvl19 = this.add.image(360, 580, 'lvl19').setScale(0.125).setDepth(1).setInteractive();
         //this.lvl20 = this.add.image(600, 580, 'lvl20').setScale(0.125).setDepth(1).setInteractive();
 
         this.add.image(175, 250, 'popup').setScale(5, 2.3);
         this.add.image(535, 250, 'popup').setScale(5, 2.3);
-        this.add.image(115, 590, 'popup').setScale(5.25, 2.3);
-        this.add.image(355, 590, 'popup').setScale(5.25, 2.3);
-        this.add.image(595, 590, 'popup').setScale(5.25, 2.3);
+        this.add.image(360, 590, 'popup').setScale(5.25, 2.3);
+        //this.add.image(355, 590, 'popup').setScale(5.25, 2.3);
+        //this.add.image(595, 590, 'popup').setScale(5.25, 2.3);
 
         //this.rightarrow = this.add.image(690, 820, 'arrowp2').setScale(1.25).setInteractive();
         this.leftarrow = this.add.image(30, 815, 'arrowp2').setScale(1.25).setAngle(180).setInteractive();
@@ -47,12 +47,12 @@ class LevelSelect4 extends Phaser.Scene {
         this.add.text(180, 360, '4-1', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(540, 120, 'O=E', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         this.add.text(540, 360, '4-2', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(120, 460, "Hidden Truths", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(120, 700, '4-3', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 460, "Fling and Zing", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 700, '4-4', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(600, 460, "Signs of Life", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(600, 700, '4-5', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 460, "Hidden Truths", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 700, '4-3', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        //this.add.text(360, 460, "Fling and Zing", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        //this.add.text(360, 700, '4-4', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        //this.add.text(600, 460, "Signs of Life", { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+       //this.add.text(600, 700, '4-5', { font: '28px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
         
 
         this.input.on('gameobjectover', function (pointer, gameObject) {

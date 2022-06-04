@@ -21,7 +21,7 @@ class LevelSelect1 extends Phaser.Scene {
             });
             isPlaying = true;
         }
-
+        
 
         this.add.tileSprite(0, 0, 720, 860, 'levelselect').setOrigin(0, 0);
 

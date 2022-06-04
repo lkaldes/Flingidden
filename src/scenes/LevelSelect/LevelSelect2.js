@@ -3,14 +3,6 @@ class LevelSelect2 extends Phaser.Scene {
         super("levelselect2Scene");
     }
     
-    preload(){
-        this.load.image('lvl6', './assets/LevelScreenshots/Level6.png');
-        this.load.image('lvl7', './assets/LevelScreenshots/Level7.png');
-        this.load.image('lvl8', './assets/LevelScreenshots/Level8.png');
-        this.load.image('lvl9', './assets/LevelScreenshots/Level9.png');
-        this.load.image('lvl10', './assets/LevelScreenshots/Level10.png');
-    }
-
     create(){
 
         //audio

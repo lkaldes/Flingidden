@@ -2,14 +2,6 @@ class LevelSelect4 extends Phaser.Scene {
     constructor() {
         super("levelselect4Scene");
     }
-    
-    preload(){
-        this.load.image('lvl16', './assets/LevelScreenshots/Level16.png');
-        this.load.image('lvl17', './assets/LevelScreenshots/Level17.png');
-        this.load.image('lvl18', './assets/LevelScreenshots/Level18.png');
-        //this.load.image('lvl19', './assets/LevelScreenshots/Level19.png');
-        //this.load.image('lvl20', './assets/LevelScreenshots/Level20.png');
-    }
 
     create(){
 

@@ -65,10 +65,12 @@ class Menu extends Phaser.Scene {
 
     create(){
         this.add.tileSprite(0, 0, 720, 860, 'title').setOrigin(0, 0);
-        this.lvl = this.physics.add.sprite(353, 420, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.htp = this.physics.add.sprite(353, 530, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
-        this.add.text(360, 420, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
-        this.add.text(360, 530, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.lvl = this.physics.add.sprite(353, 310, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.htp = this.physics.add.sprite(353, 420, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.add.text(360, 310, 'Level Select', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.add.text(360, 420, 'How to Play', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
+        this.credits = this.physics.add.sprite(353, 530, 'unselected').setInteractive().setAngle(90).setScale(1.5).setSize(130,40);
+        this.add.text(360, 530, 'Credits', { font: '36px Impact', fill: '#1b2cc2'}).setOrigin(0.5);
 
 
         //play music
@@ -94,6 +96,9 @@ class Menu extends Phaser.Scene {
             } else if (this.htp.texture.key == 'selected') {
                 this.sound.play('Select');
                 this.scene.start("HowToScene");
+            } else if (this.credits.texture.key == 'selected') {
+                this.sound.play('Select');
+                this.scene.start("CreditsScene");
             }
         }.bind(this));
     } 

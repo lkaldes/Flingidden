@@ -36,7 +36,7 @@ class Credits extends Phaser.Scene {
         this.add.tileSprite(0, 0, 720, 860, 'plain').setOrigin(0, 0);
 
         // slime
-        this.player = this.add.sprite(80, 240, '').setScale(2.5);
+        this.player = this.add.sprite(80, 240, '').setScale(2.5).setAngle(-15);
         this.anims.create({
             key: 'Fling',
             frames: this.anims.generateFrameNames('slime_atlas', {

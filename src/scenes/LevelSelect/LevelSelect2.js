@@ -69,19 +69,14 @@ class LevelSelect2 extends Phaser.Scene {
         });
         this.input.on('pointerup', function (pointer) {
             if (this.lvl6.scale > 0.125) {
-                this.sound.play('Start');
                 this.scene.start("level6Scene");
             } else if (this.lvl7.scale > 0.125) {
-                this.sound.play('Start');
                 this.scene.start("level7Scene");
             } else if (this.lvl8.scale > 0.125) {
-                this.sound.play('Start');
                 this.scene.start("level8Scene");
             } else if (this.lvl9.scale > 0.125) {
-                this.sound.play('Start');
                 this.scene.start("level9Scene");
             } else if (this.lvl10.scale > 0.125) {
-                this.sound.play('Start');
                 this.scene.start("level10Scene");
             } else if (this.rightarrow.scale > 1.25) {
                 this.sound.play('Select');

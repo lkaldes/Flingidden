@@ -133,11 +133,15 @@ class Level0 extends Phaser.Scene {
                 this.player2score++;
                 this.player.setPosition(590, 40);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(180);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
                 this.player.setPosition(130, 870);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(0);
                 this.playerturn = 1;
             } else {
                 this.player.setTexture('slime_atlas', 'Bounce');

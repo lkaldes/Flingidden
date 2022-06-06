@@ -27,6 +27,7 @@ class Level2 extends Phaser.Scene {
 
         
         this.game.sound.stopAll();
+        this.sound.play('Start');
         //play music
         this.loopingAudio = this.sound.add("KitchenMusic").setVolume(0.2);
         this.loopingAudio.play({
@@ -132,11 +133,15 @@ class Level2 extends Phaser.Scene {
                 this.player2score++;
                 this.player.setPosition(280, 40);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(180);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
                 this.player.setPosition(440, 870);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(0);
                 this.playerturn = 1;
             } else {
                 this.player.setTexture('slime_atlas', 'Bounce');

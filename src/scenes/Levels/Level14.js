@@ -137,20 +137,26 @@ class Level14 extends Phaser.Scene {
                 this.player2score++;
                 this.player.setPosition(360, 40);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(180);
                 this.playerturn = 0;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'goal2') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'goal2')) {
                 this.player1score++;
                 this.player.setPosition(360, 870);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
+                this.player.setAngle(0);
                 this.playerturn = 1;
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'sticky') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'sticky')) {
                 this.sticky = true;
                 this.matter.world.setGravity(0, 0);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
             } else if ((bodyA.gameObject && bodyA.gameObject.texture.key == 'stickywindmill') || (bodyB.gameObject && bodyB.gameObject.texture.key == 'stickywindmill')) {
                 this.sticky = true;
                 this.matter.world.setGravity(0, 0);
                 this.player.setVelocity(0);
+                this.player.setAngularVelocity(0);
             } else {
                 this.player.setTexture('slime_atlas', 'Bounce');
                 this.sound.play('bounce');
